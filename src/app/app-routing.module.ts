@@ -5,8 +5,10 @@ import { AdminLayoutComponent } from './admin-layout/admin-layout.component';
 import { HomeComponent } from './user-layout/home/home.component';
 import { DashboardComponent } from './admin-layout/dashboard/dashboard.component';
 import { UserLayoutComponent } from './user-layout/user-layout.component';
+import { LoginComponent } from './login/login.component';
 
 export const appRoutes: Routes = [
+  { path: 'login', component: LoginComponent},
   {
     path: '', component: UserLayoutComponent,
     children:[

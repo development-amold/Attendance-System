@@ -1,0 +1,36 @@
+<div class="container-fluid py-5">
+  <div class="row">
+    <div class="col-md-12">
+        <div class="row">
+          <div class="col-md-6 mx-auto">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="mb-0">SignIn</h3>
+              </div>
+              <div class="card-body">
+                  <form (submit)="login()" method="POST" [formGroup]="angForm" class="form" role="form" autocomplete="off" id="formLogin" novalidate>
+                      <div class="form-group">
+                          <label for="uname1">Email</label>
+                          <input type="text" class="form-control form-control-lg" autofocus name="email" id="email" formControlName="email" [(ngModel)]="credentials.email" required>
+                          <div class="invalid-feedback" *ngIf="email.errors && (email.dirty || email.touched)">
+                              <p *ngIf="email.errors.required">Email is required</p>
+                              <p *ngIf="email.errors.pattern">The email address must be valid</p>                              
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <label for="password">Password</label>
+                          <input type="password" class="form-control form-control-lg" id="password" required formControlName="password" [(ngModel)]="credentials.password">
+                          <div class="invalid-feedback" *ngIf="password.errors && (password.dirty || password.touched)">
+                              <p *ngIf="password.errors.required">Password is required</p>
+                              <p *ngIf="password.errors.minlength">Password must be 8 characters long, we need another {{password.errors.minlength.requiredLength - password.errors.minlength.actualLength}} characters </p>
+                          </div>
+                      </div>
+                      <button type="submit" class="btn btn-primary btn-lg btn-block" id="btnLogin" [disabled]="angForm.pristine || angForm.invalid">Login</button>
+                  </form>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+</div>

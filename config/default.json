@@ -1,0 +1,9 @@
+{
+    "dbConfig": {
+    "host": "localhost",
+    "port": 27017,
+    "dbName": "auth-angular5-node",
+    "username": "root",
+    "password": "root"
+    }
+}
