@@ -1,5 +1,5 @@
 var express = require('express');
-var expressListRoutes   = require('express-list-routes');
+var expressListRoutes = require('express-list-routes');
 var router = express.Router();
 var jwt = require('express-jwt');
 
