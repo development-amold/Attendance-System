@@ -21,7 +21,8 @@ export class LoginComponent implements OnInit {
 
   constructor(private authService: AuthenticationService, private router: Router, private _buttonService: ButtonService) { 
     this.createFormControls();
-    this.createForm();        
+    this.createForm();
+    localStorage.setItem('access_token', "AMOLDD");
   }
 
   ngOnInit() {

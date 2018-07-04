@@ -1,14 +1,15 @@
 var mongoose = require( 'mongoose' );
-var loginRecord = new mongoose.Schema(
+var Schema = mongoose.Schema;
+var loginRecordSchema = new mongoose.Schema(
   {
-    email: { type: String, unique: true, required: true },
+    user_id: { type: Schema.Types.ObjectId, required: true, ref: 'User' },
     login_date: { type: Date, default: Date.now },
     in_time:{ type: Date },
     out_time: { type: Date },
-    task:{ type: String }
+    task: String
   },
   {
-    timestamps: true  // auto adds created_At & updated_at fields
+    timestamps: true  // auto adds created_At & updated_At fields
   }
 );
-mongoose.model('LoginRecord', loginRecord);
+mongoose.model('LoginRecord', loginRecordSchema);

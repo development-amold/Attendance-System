@@ -18,9 +18,9 @@ import { UserFooterComponent } from './user-layout/user-footer/user-footer.compo
 import { UserHeaderComponent } from './user-layout/user-header/user-header.component';
 import { LoginComponent } from './login/login.component';
 import { AuthenticationService } from './_services/authentication.service';
-import { AuthGuardService } from './_services/auth-guard.service';
 import { HomeService } from './_services/home.service';
 import { ButtonService } from './_services/button.service';
+import { AuthorizeGuard } from './authguard/authorize.guard';
 
 
 @NgModule({
@@ -40,7 +40,7 @@ import { ButtonService } from './_services/button.service';
   imports: [
     BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule ,HttpClientModule
   ],
-  providers: [AuthenticationService, AuthGuardService, ButtonService, HomeService],
+  providers: [AuthenticationService, AuthorizeGuard, ButtonService, HomeService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

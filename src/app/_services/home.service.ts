@@ -5,7 +5,7 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class HomeService {
-  api_uri = environment.base_api_url;
+  api_uri = environment.BASE_URL;
   constructor(private http: HttpClient) {
 
    }

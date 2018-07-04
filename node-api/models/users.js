@@ -2,19 +2,26 @@ var mongoose = require( 'mongoose' );
 var crypto = require('crypto');
 var jwt = require('jsonwebtoken');
 
-var userSchema = new mongoose.Schema({
-    email: {
-      type: String,
-      unique: true,
-      required: true
+var userSchema = new mongoose.Schema(
+    {
+        email: {
+                type: String,
+                unique: true,
+                required: true
+        },
+        name: {
+            type: String,
+            required: true
+        },
+        hash: String,
+        salt: String,
+        is_admin: { type: Boolean, default: false}, 
+        is_active: { type: Boolean, default: true},
     },
-    name: {
-      type: String,
-      required: true
-    },
-    hash: String,
-    salt: String
-});
+    {
+        timestamps: true  // auto adds created_At & updated_At fields
+    }    
+);
 
 userSchema.methods.setPassword = function(password){
     this.salt = crypto.randomBytes(16).toString('hex');

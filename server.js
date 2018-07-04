@@ -17,13 +17,15 @@ const express = require('express'),
 
     var dbConfig = config.get('dbConfig');
     // const db_conn_string = `mongodb://${dbConfig.username}:${dbConfig.password}@${dbConfig.host}:${dbConfig.port}/${dbConfig.dbName}`;
-    const db_conn_string = 'mongodb://localhost:27017/auth-angular5-node'
+    const db_conn_string = 'mongodb://localhost:27017/attendance'
 
     mongoose.Promise = global.Promise;
-    mongoose.connect(db_conn_string).then(
+    mongoose.connect(db_conn_string,{ useNewUrlParser: true }).then(
         client => {console.log("Connected to database: "+client.connections[0].name) },
         err => { console.log('Can not connect to the database: '+ err)}
     );
+
+    require('./node-api/models/seed');  // putting here so its called after db conn made & will comment once its set up completed
 
     //   scheme://username:password@host:port/database
     //  Production Heroku URL: mongodb://heroku_ff4kqnxp:5vppf5fkcfsri34i4scnjf26cr@ds157089.mlab.com:57089/heroku_ff4kqnxp'
