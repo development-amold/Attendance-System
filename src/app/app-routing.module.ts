@@ -11,18 +11,17 @@ import { AuthorizeGuard } from './authguard/authorize.guard';
 
 export const appRoutes: Routes = [
   {
-    path: '',  canActivate: [AuthorizeGuard], component: UserLayoutComponent,
+    path: '',  canActivate: [AuthorizeGuard], data: {ui: "frontend"}, component: UserLayoutComponent,
     children:[
-      {path: '',redirectTo: "home", pathMatch: "full"},
+      {path: '',component: HomeComponent},
       {path: 'home',component: HomeComponent},
     ]
   }, // end of frontend
   {
-    path: 'dashboard',canActivate: [AuthorizeGuard], component: AdminLayoutComponent,
+    path: 'dashboard',canActivate: [AuthorizeGuard], data: {ui: "backend"} ,component: AdminLayoutComponent,
     children:[ // relative parent path
-      {path: '', redirectTo: "dashboard",pathMatch: "full"},
+      {path: '', component: DashboardComponent}, //default dashboard
       {path: 'dashboard', component: DashboardComponent},
-      // { path: '**', component: PageNotFoundComponent},
       // { path: '**', redirectTo: "",pathMatch: "full"}, //--redirect to root path if invalid path found , This wildCard route always be at last
     ]
   }, //end of backend

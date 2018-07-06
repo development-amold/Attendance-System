@@ -40,25 +40,20 @@ module.exports.login = function(req, res) {
   //   return;
   // }
 
-  passport.authenticate('local', function(err, user, info){
-    var token;
+  passport.authenticate('local', function(err, user, info){  //it validated the localServer as we can use "google", "facebook", "github" thirdparty strategies i.e. provider strategy 
 
-    // If Passport throws/catches an error
+    var token;
     if (err) {
       res.status(404).json(err);
       return;
     }
-
     // If a user is found
     if(user){
       token = user.generateJwt();
-      res.status(200);
-      res.json({
-        "token" : token
-      });
+      sendJSONresponse(res, 200, {"token" : token});
     } else {
       // If user is not found
-      res.status(401).json(info);
+      sendJSONresponse(res, 401, info); //getting data from passport.js
     }
   })(req, res);
 

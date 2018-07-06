@@ -22,10 +22,12 @@
                           <input type="password" class="form-control form-control-lg" id="password" required formControlName="password" [(ngModel)]="credentials.password">
                           <div class="invalid-feedback" *ngIf="password.errors && (password.dirty || password.touched)">
                               <p *ngIf="password.errors.required">Password is required</p>
+                              <!-- <p *ngIf="password.errors.pattern">Password must be valid</p> -->
                               <p *ngIf="password.errors.minlength">Password must be 8 characters long, we need another {{password.errors.minlength.requiredLength - password.errors.minlength.actualLength}} characters </p>
+                              
                           </div>
                       </div>
-                      <button type="submit" class="btn btn-primary btn-lg btn-block" id="btnLogin" [disabled]="angForm.pristine || angForm.invalid">Login</button>
+                      <button type="submit" class="btn btn-primary btn-lg btn-block" [disabled]="angForm.pristine || angForm.invalid">Login</button>
                   </form>
               </div>
             </div>

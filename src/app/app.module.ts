@@ -22,6 +22,11 @@ import { HomeService } from './_services/home.service';
 import { ButtonService } from './_services/button.service';
 import { AuthorizeGuard } from './authguard/authorize.guard';
 
+// For toastr notifications
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { Globalvar } from './_shared/globals';  //maintain global data
 
 @NgModule({
   declarations: [
@@ -38,9 +43,19 @@ import { AuthorizeGuard } from './authguard/authorize.guard';
     LoginComponent
   ],
   imports: [
-    BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule ,HttpClientModule
+    BrowserModule, 
+    AppRoutingModule, 
+    FormsModule, 
+    ReactiveFormsModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({ // toastr global settings
+      positionClass: 'toast-top-center',
+      preventDuplicates: true,  
+      closeButton: true    
+    }),
   ],
-  providers: [AuthenticationService, AuthorizeGuard, ButtonService, HomeService],
+  providers: [AuthenticationService, AuthorizeGuard, ButtonService, HomeService, Globalvar],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

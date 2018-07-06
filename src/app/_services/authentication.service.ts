@@ -9,9 +9,10 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { ButtonService } from './button.service';
 
 
-export interface UserDetails {
+export interface UserDetails { //this is similar content as that of attendance-system\node-api\models\users.js //generateJwt => model : dataType -> we can use it in angular views
   id: string;
   email: string;
+  roleid: number;
   name: string;
   exp: number;
   iat: number;
@@ -34,13 +35,13 @@ export class AuthenticationService {
   constructor(private http: HttpClient, private router: Router, private _buttonService: ButtonService) {}
 
   private saveToken(token: string): void {
-    localStorage.setItem('mean-token', token);
+    localStorage.setItem('access_token', token);
     this.token = token;
   }
 
   private getToken(): string {
     if (!this.token) {
-      this.token = localStorage.getItem('mean-token');
+      this.token = localStorage.getItem('access_token');
     }
     return this.token;
   }
@@ -50,7 +51,7 @@ export class AuthenticationService {
     let payload;
     if (token) {
       payload = token.split('.')[1];
-      payload = window.atob(payload);
+      payload = window.atob(payload); //The atob() method decodes a base-64 encoded string. This method decodes a string of data which has been encoded by the btoa() method.
       return JSON.parse(payload);
     } else {
       return null;
@@ -80,9 +81,9 @@ export class AuthenticationService {
     let base;
     
     if (method === 'post') {
-      base = this.http.post(`${environment.BASE_URL}/${type}`, user);
+      base = this.http.post(`${environment.BASE_URL}/api/${type}`, user);
     } else {
-      base = this.http.get(`${environment.BASE_URL}/${type}`, { headers: { Authorization: `Bearer ${this.getToken()}` }});
+      base = this.http.get(`${environment.BASE_URL}/api/${type}`, { headers: { Authorization: `Bearer ${this.getToken()}` }});
     }
 
     const request = base.pipe(
@@ -112,6 +113,6 @@ export class AuthenticationService {
   public logout(): void {
     this.token = '';
     this._buttonService.updateLoginStatus(false);
-    window.localStorage.removeItem('mean-token');
+    window.localStorage.removeItem('access_token');
   }
 }

@@ -3,6 +3,8 @@ var LocalStrategy = require('passport-local').Strategy;
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
 
+// http://www.passportjs.org/docs/downloads/html/ ==> Passport mostly useful to login google, fb, linkedin i.e. accessing third party API from our website
+
 passport.use(new LocalStrategy({
     usernameField: 'email'
   },

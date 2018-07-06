@@ -5,7 +5,7 @@ var jwt = require('express-jwt');
 
 //to make sure that only authenticated users can access the /profile route. The way to validate a request is to ensure that the JWT sent with it is genuine, by using the secret again.
 var auth = jwt({
-  secret: 'MY_SECRET',
+  secret: 'MY_SERVER_SECRET_KEY',
   userProperty: 'payload'
 });
 
