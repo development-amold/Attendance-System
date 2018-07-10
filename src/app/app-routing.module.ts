@@ -7,6 +7,12 @@ import { DashboardComponent } from './admin-layout/dashboard/dashboard.component
 import { UserLayoutComponent } from './user-layout/user-layout.component';
 import { LoginComponent } from './login/login.component';
 import { AuthorizeGuard } from './authguard/authorize.guard';
+import { UsersListComponent } from './views/users/users-list/users-list.component';
+import { UsersAddComponent } from './views/users/users-add/users-add.component';
+import { UsersEditComponent } from './views/users/users-edit/users-edit.component';
+import { AttendanceAddComponent } from './views/users-attendance/attendance-add/attendance-add.component';
+import { AttendanceListComponent } from './views/users-attendance/attendance-list/attendance-list.component';
+import { AttendanceEditComponent } from './views/users-attendance/attendance-edit/attendance-edit.component';
 
 
 export const appRoutes: Routes = [
@@ -21,7 +27,12 @@ export const appRoutes: Routes = [
     path: 'dashboard',canActivate: [AuthorizeGuard], data: {ui: "backend"} ,component: AdminLayoutComponent,
     children:[ // relative parent path
       {path: '', component: DashboardComponent}, //default dashboard
-      {path: 'dashboard', component: DashboardComponent},
+      {path: 'employees', component: UsersListComponent},
+      {path: 'employees/new', component: UsersAddComponent},
+      {path: 'employees/edit/:id', component: UsersEditComponent},
+      {path: 'attendance', component: AttendanceListComponent},
+      {path: 'attendance/new', component: AttendanceAddComponent},
+      {path: 'attendance/edit/:id', component: AttendanceEditComponent}      
       // { path: '**', redirectTo: "",pathMatch: "full"}, //--redirect to root path if invalid path found , This wildCard route always be at last
     ]
   }, //end of backend

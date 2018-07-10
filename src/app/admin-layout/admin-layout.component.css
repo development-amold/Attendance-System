@@ -1,0 +1,9 @@
+.navbar-list-icon-style{
+    color:black !important;
+}
+.navbar-list-icon-selected-style{
+    color:#0099cc !important;
+}
+.active{
+    background-color: rgb(0,0,0,.04) !important;
+}

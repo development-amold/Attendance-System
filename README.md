@@ -7,3 +7,9 @@ For ubuntu auto watch directory detection: sudo ng serve
 2. Added toastr notifications: https://www.npmjs.com/package/ngx-toastr: 1. Added toastr CSS in css folder 2. Added BrowserAnimationModule 3. Added ToastrModule  in app.module.ts  https://scttcper.github.io/ngx-toastr/
 
 3. Used https://www.npmjs.com/package/jsonwebtoken
+
+4. Angualr Material: npm install --save @angular/material @angular/cdk (This is angular5 dataTable docs https://v5.material.angular.io/components/table/examples)
+
+5. Set up fonts in style.css && index.html
+
+6. https://material.io/tools/icons/?style=baseline

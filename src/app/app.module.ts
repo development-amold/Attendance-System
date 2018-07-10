@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule, FormsModule, FormGroup, FormControl, Validators, FormBuilder} from '@angular/forms';
@@ -24,9 +25,57 @@ import { AuthorizeGuard } from './authguard/authorize.guard';
 
 // For toastr notifications
 import { ToastrModule } from 'ngx-toastr';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { Globalvar } from './_shared/globals';  //maintain global data
+//angular material
+import { 
+  // CdkTreeModule,
+  MatAutocompleteModule,
+  // MatBadgeModule,
+  // MatBottomSheetModule,
+  MatButtonModule,
+  MatButtonToggleModule,
+  MatCardModule,
+  MatCheckboxModule,
+  MatChipsModule,
+  MatStepperModule,
+  MatDatepickerModule,
+  MatDialogModule,
+  MatDividerModule,
+  MatExpansionModule,
+  MatGridListModule,
+  MatIconModule,
+  MatInputModule,
+  MatListModule,
+  MatMenuModule,
+  MatNativeDateModule,
+  MatPaginatorModule,
+  MatProgressBarModule,
+  MatProgressSpinnerModule,
+  MatRadioModule,
+  MatRippleModule,
+  MatSelectModule,
+  MatSidenavModule,
+  MatSliderModule,
+  MatSlideToggleModule,
+  MatSnackBarModule,
+  MatSortModule,
+  MatTableModule,
+  MatTabsModule,
+  MatToolbarModule,
+  MatTooltipModule,
+  // MatTreeModule,  
+} from '@angular/material';
+
+import {CdkTableModule} from '@angular/cdk/table';
+
+import { Globalvar } from './_shared/globals';
+import { UsersAddComponent } from './views/users/users-add/users-add.component';
+import { UsersEditComponent } from './views/users/users-edit/users-edit.component';
+import { UsersListComponent } from './views/users/users-list/users-list.component';
+import { AttendanceAddComponent } from './views/users-attendance/attendance-add/attendance-add.component';
+import { AttendanceEditComponent } from './views/users-attendance/attendance-edit/attendance-edit.component';
+import { AttendanceListComponent } from './views/users-attendance/attendance-list/attendance-list.component';
+
 
 @NgModule({
   declarations: [
@@ -40,7 +89,13 @@ import { Globalvar } from './_shared/globals';  //maintain global data
     UserLayoutComponent,
     UserFooterComponent,
     UserHeaderComponent,
-    LoginComponent
+    LoginComponent,
+    UsersAddComponent,
+    UsersEditComponent,
+    UsersListComponent,
+    AttendanceAddComponent,
+    AttendanceEditComponent,
+    AttendanceListComponent
   ],
   imports: [
     BrowserModule, 
@@ -49,11 +104,87 @@ import { Globalvar } from './_shared/globals';  //maintain global data
     ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    CdkTableModule,
+    // CdkTreeModule,
+    MatAutocompleteModule,
+    // MatBadgeModule,
+    // MatBottomSheetModule,
+    MatButtonModule,
+    MatButtonToggleModule,
+    MatCardModule,
+    MatCheckboxModule,
+    MatChipsModule,
+    MatStepperModule,
+    MatDatepickerModule,
+    MatDialogModule,
+    MatDividerModule,
+    MatExpansionModule,
+    MatGridListModule,
+    MatIconModule,
+    MatInputModule,
+    MatListModule,
+    MatMenuModule,
+    MatNativeDateModule,
+    MatPaginatorModule,
+    MatProgressBarModule,
+    MatProgressSpinnerModule,
+    MatRadioModule,
+    MatRippleModule,
+    MatSelectModule,
+    MatSidenavModule,
+    MatSliderModule,
+    MatSlideToggleModule,
+    MatSnackBarModule,
+    MatSortModule,
+    MatTableModule,
+    MatTabsModule,
+    MatToolbarModule,
+    MatTooltipModule,
+    // MatTreeModule,
     ToastrModule.forRoot({ // toastr global settings
       positionClass: 'toast-top-center',
       preventDuplicates: true,  
       closeButton: true    
     }),
+  ],
+  exports:[
+    CdkTableModule,
+    // CdkTreeModule,
+    MatAutocompleteModule,
+    // MatBadgeModule,
+    // MatBottomSheetModule,
+    MatButtonModule,
+    MatButtonToggleModule,
+    MatCardModule,
+    MatCheckboxModule,
+    MatChipsModule,
+    MatStepperModule,
+    MatDatepickerModule,
+    MatDialogModule,
+    MatDividerModule,
+    MatExpansionModule,
+    MatGridListModule,
+    MatIconModule,
+    MatInputModule,
+    MatListModule,
+    MatMenuModule,
+    MatNativeDateModule,
+    MatPaginatorModule,
+    MatProgressBarModule,
+    MatProgressSpinnerModule,
+    MatRadioModule,
+    MatRippleModule,
+    MatSelectModule,
+    MatSidenavModule,
+    MatSliderModule,
+    MatSlideToggleModule,
+    MatSnackBarModule,
+    MatSortModule,
+    MatTableModule,
+    MatTabsModule,
+    MatToolbarModule,
+    MatTooltipModule,
+    // MatTreeModule    
   ],
   providers: [AuthenticationService, AuthorizeGuard, ButtonService, HomeService, Globalvar],
   bootstrap: [AppComponent]

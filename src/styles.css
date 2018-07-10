@@ -1,4 +1,33 @@
 /* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+
+/*-START---FONTS CSS--MATERIAL ICONS----*/
+@font-face {
+    font-family: 'Material Icons';
+    font-style: normal;
+    font-weight: 400;
+    /* src: url(https://fonts.gstatic.com/s/materialicons/v38/flUhRq6tzZclQEJ-Vdg-IuiaDsNcIhQ8tQ.woff2) format('woff2'); */
+    src: url(assets/fonts/flUhRq6tzZclQEJ-Vdg-IuiaDsNcIhQ8tQ.woff2) format('woff2');    
+  }
+  
+  .material-icons {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+  }
+    
+/*--END--FONTS CSS--MATERIAL ICONS----*/
+
 .invalid-feedback{
     display: block;
 }

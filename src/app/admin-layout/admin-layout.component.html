@@ -1,5 +1,52 @@
 <div class="container-fluid">
-  <app-header></app-header>
-  <router-outlet></router-outlet>
-  <app-footer></app-footer>
+    <!-- <app-header></app-header> -->
+    <div class="mat-elevation-z2" style="padding-bottom: 0.5rem;padding-top: 0.5rem; background-color: #188ED4" >
+      <button *ngIf="!nav_opened" mat-icon-button (click)="sidenav.open()"><mat-icon>menu</mat-icon></button>
+      <button *ngIf="nav_opened"mat-icon-button (click)="sidenav.close()"><mat-icon>close</mat-icon></button>
+    </div>
+    
+    <!--SIDEBAR-->
+    <mat-sidenav-container autosize style="min-height: 82vh;background-color:  #E9EDF0 !important;">
+      <mat-sidenav #sidenav mode="over" [(opened)]="nav_opened">
+          <mat-nav-list style="min-height: 98vh;padding-top: 0px;">      
+
+            <mat-list-item (click)="navigateLink('/dashboard'); sidenav.close();" [ngClass]="(selectedPath == '/dashboard'? 'active' : 'navbar-list-item-style')">
+              <mat-icon mat-list-icon  [ngClass]="(selectedPath == '/dashboard'? 'navbar-list-icon-selected-style' : 'navbar-list-icon-style')" >dashboard</mat-icon>
+              <p matLine>Dashboard</p>
+            </mat-list-item>
+            <mat-divider></mat-divider>
+            
+            <mat-expansion-panel [expanded]="panelOpenState === 1" (opened)="panelOpenState = 1">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  <mat-icon mat-list-icon>how_to_reg</mat-icon>
+                  <span style="padding-left: 14px;">Employees</span>                  
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <mat-list-item *ngIf="panelOpenState === 1"  (click)="navigateLink('/dashboard/employees/new'); sidenav.close();" [ngClass]="(selectedPath == '/dashboard/employees/new'? 'active' : 'navbar-list-item-style')">
+                <mat-icon mat-list-icon [ngClass]="(selectedPath == '/dashboard/employees/new'? 'navbar-list-icon-selected-style' : 'navbar-list-icon-style')">person_add</mat-icon>
+                <p matLine>Add</p>
+              </mat-list-item>                        
+              <mat-list-item *ngIf="panelOpenState === 1" (click)="navigateLink('/dashboard/employees'); sidenav.close();" [ngClass]="(selectedPath == '/dashboard/employees'? 'active' : 'navbar-list-item-style')">
+                <mat-icon mat-list-icon [ngClass]="(selectedPath == '/dashboard/employees'? 'navbar-list-icon-selected-style' : 'navbar-list-icon-style')">people</mat-icon>
+                <p matLine>List</p>
+              </mat-list-item>              
+            </mat-expansion-panel>
+            <mat-divider></mat-divider>
+
+            <mat-list-item (click)="navigateLink('/dashboard/attendance'); sidenav.close(); " [ngClass]="(selectedPath == '/dashboard/attendance'? 'active' : 'navbar-list-item-style')">
+              <mat-icon mat-list-icon [ngClass]="(selectedPath == '/dashboard/attendance'? 'navbar-list-icon-selected-style' : 'navbar-list-icon-style')">date_range</mat-icon>
+              <p matLine>Attendance</p>
+            </mat-list-item>                        
+
+          </mat-nav-list>  
+      </mat-sidenav>
+
+      <mat-sidenav-content>
+        <router-outlet></router-outlet>
+      </mat-sidenav-content>
+    </mat-sidenav-container> 
+
+    <app-footer></app-footer>
 </div>
+
