@@ -9,7 +9,9 @@ export const environment = {
   API_ENDPOINT: {
     login: "login",
     logout: "logout",
-    employees: "employees"
+    employees: "employees",
+    addEmployee: "addEmployee",
+    addAttendance: "addAttendance"
 
   }
 };

@@ -10,7 +10,7 @@ import { environment } from '../../environments/environment';
 @Injectable()
 export class UserService {
   userModel_Response: any;
-  api_uri = environment.BASE_URL;
+  api_uri = environment.BASE_URL + '/api';
 
   constructor(
     private http: HttpClient,
@@ -18,8 +18,13 @@ export class UserService {
 
   getUsers() {
     const uri = this.api_uri + '/' + environment.API_ENDPOINT.employees;
-    console.log(uri)
     return this.http.get(uri).map(res => {return res;});
   }  
+
+  addUser(user: User):Observable<User>{
+    const uri = this.api_uri + '/' + environment.API_ENDPOINT.addEmployee;
+    return this.http.post<User>(uri,user)//.map(res => {console.log(res);return res;});    
+  }
+
 
 }

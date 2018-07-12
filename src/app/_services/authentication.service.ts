@@ -7,6 +7,7 @@ import { environment } from '../../environments/environment';
 import { Subject } from 'rxjs/Subject';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { ButtonService } from './button.service';
+import { ToastrService } from 'ngx-toastr';
 
 
 export interface UserDetails { //this is similar content as that of attendance-system\node-api\models\users.js //generateJwt => model : dataType -> we can use it in angular views
@@ -30,16 +31,22 @@ export interface TokenPayload {
 
 @Injectable()
 export class AuthenticationService {
-  private token: string;
+  private token: string = '';
 
-  constructor(private http: HttpClient, private router: Router, private _buttonService: ButtonService) {}
+  constructor(
+    private http: HttpClient,
+    private router: Router, 
+    private _buttonService: ButtonService,
+    private toastr: ToastrService
+  ) 
+  {}
 
   private saveToken(token: string): void {
     localStorage.setItem('access_token', token);
     this.token = token;
   }
 
-  private getToken(): string {
+  public getToken(): string {
     if (!this.token) {
       this.token = localStorage.getItem('access_token');
     }
@@ -113,6 +120,7 @@ export class AuthenticationService {
   public logout(): void {
     this.token = '';
     this._buttonService.updateLoginStatus(false);
-    window.localStorage.removeItem('access_token');
+    this.toastr.success('LogOut successfully', 'Success');
+    localStorage.clear();
   }
 }

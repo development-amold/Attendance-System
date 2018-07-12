@@ -1,9 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ReactiveFormsModule, FormsModule, FormGroup, FormControl, Validators, FormBuilder} from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
+
 
 
 import { AppComponent } from './app.component';
@@ -22,6 +23,7 @@ import { AuthenticationService } from './_services/authentication.service';
 import { HomeService } from './_services/home.service';
 import { ButtonService } from './_services/button.service';
 import { AuthorizeGuard } from './authguard/authorize.guard';
+import {CommonHttpInterceptor} from './interceptor/common-http-interceptor';
 
 // For toastr notifications
 import { ToastrModule } from 'ngx-toastr';
@@ -75,6 +77,7 @@ import { UsersListComponent } from './views/users/users-list/users-list.componen
 import { AttendanceAddComponent } from './views/users-attendance/attendance-add/attendance-add.component';
 import { AttendanceEditComponent } from './views/users-attendance/attendance-edit/attendance-edit.component';
 import { AttendanceListComponent } from './views/users-attendance/attendance-list/attendance-list.component';
+import { UserService } from './_services/user.service';
 
 
 @NgModule({
@@ -186,7 +189,19 @@ import { AttendanceListComponent } from './views/users-attendance/attendance-lis
     MatTooltipModule,
     // MatTreeModule    
   ],
-  providers: [AuthenticationService, AuthorizeGuard, ButtonService, HomeService, Globalvar],
+  providers: [
+    AuthenticationService, 
+    AuthorizeGuard, 
+    ButtonService, 
+    HomeService, 
+    Globalvar,
+    UserService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: CommonHttpInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

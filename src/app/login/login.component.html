@@ -8,7 +8,7 @@
                 <h3 class="mb-0">SignIn</h3>
               </div>
               <div class="card-body">
-                  <form (submit)="login()" method="POST" [formGroup]="angForm" class="form" role="form" autocomplete="off" id="formLogin" novalidate>
+                  <form autocomplete="off" (submit)="login()" method="POST" [formGroup]="angForm" class="form" role="form" autocomplete="off" id="formLogin" novalidate>
                       <div class="form-group">
                           <label for="uname1">Email</label>
                           <input type="text" class="form-control form-control-lg" autofocus name="email" id="email" formControlName="email" [(ngModel)]="credentials.email" required>

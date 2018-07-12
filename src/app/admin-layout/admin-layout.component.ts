@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthenticationService } from '../_services/authentication.service';
 
 @Component({
   selector: 'app-layout',
@@ -12,7 +13,11 @@ export class AdminLayoutComponent implements OnInit {
   panelOpenState: any = 0;
   expandedNavMenu: any = "";
 
-  constructor(private router: Router) { 
+  constructor(
+    private router: Router,
+    private authService: AuthenticationService
+  ) 
+  { 
     this.selectedPath = localStorage.getItem('selectedPath') || this.selectedPath;
     if(localStorage.getItem("expandedNavMenu")){
       this.panelOpenState = 1;
@@ -42,6 +47,11 @@ export class AdminLayoutComponent implements OnInit {
   navigateLink(linkpath){
     this.setNavActiveClass(linkpath);
     this.router.navigate([linkpath]);
+  }
+
+  logout(): void{
+    this.authService.logout();
+    this.router.navigate(["/login"]);
   }
 
 }

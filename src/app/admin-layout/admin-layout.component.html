@@ -1,10 +1,10 @@
 <div class="container-fluid">
     <!-- <app-header></app-header> -->
-    <div class="mat-elevation-z2" style="padding-bottom: 0.5rem;padding-top: 0.5rem; background-color: #188ED4" >
+    <div class="mat-elevation-z2" style="background-color: #188ED4">
       <button *ngIf="!nav_opened" mat-icon-button (click)="sidenav.open()"><mat-icon>menu</mat-icon></button>
       <button *ngIf="nav_opened"mat-icon-button (click)="sidenav.close()"><mat-icon>close</mat-icon></button>
-    </div>
-    
+      <button style="float: right; margin-top: 4px; margin-right: 25px; font-weight: 600" class="btn btn-sm" (click)="logout()">LogOut</button>
+
     <!--SIDEBAR-->
     <mat-sidenav-container autosize style="min-height: 82vh;background-color:  #E9EDF0 !important;">
       <mat-sidenav #sidenav mode="over" [(opened)]="nav_opened">

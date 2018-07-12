@@ -13,3 +13,5 @@ For ubuntu auto watch directory detection: sudo ng serve
 5. Set up fonts in style.css && index.html
 
 6. https://material.io/tools/icons/?style=baseline
+
+7. Added Authorization header with angular interceptor and node express-jwt

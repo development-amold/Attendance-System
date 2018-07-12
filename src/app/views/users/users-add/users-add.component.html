@@ -1,3 +1,43 @@
-<p>
-  users-add works!
-</p>
+<mat-card class="mat-elevation-z10">
+  <mat-card-title  align="center">Add User</mat-card-title>
+  <mat-divider></mat-divider>
+  <mat-card-content>
+    <br />
+    <form (submit)="saveUser()" method="POST" [formGroup]="angForm" class="form" role="form" autocomplete="off" id="formLogin" novalidate>
+        <input id="fake_user_email" name="fake_user[email]" style="position:absolute; top:-200px;" type="text" value="">
+        <input id="fake_user_password" name="fake_user[name]" style="position:absolute; top:-200px;" type="password" value="" >
+              
+        <div class="row">
+          <div class="col-md-4 col-sm-12 col-xs-12">
+            <mat-form-field> 
+              <input matInput type="text" autofocus autocomplete="false" name="email" id="email" formControlName="email" [(ngModel)]="userModel.email" placeholder="Email" required>
+              <mat-error *ngIf="email.errors && (email.dirty || email.touched)">{{getErrorMsg()}}</mat-error>
+            </mat-form-field>
+          </div>  
+        </div>
+        <div class="row">
+          <div class="col-md-4 col-sm-12 col-xs-12">
+            <mat-form-field> 
+              <input matInput type="text" autocomplete="false" name="name" id="name" formControlName="name" [(ngModel)]="userModel.name" placeholder="Name" required>
+              <mat-error *ngIf="name.errors && (name.dirty || name.touched)">{{getErrorMsg2()}}</mat-error>
+            </mat-form-field>
+          </div>  
+        </div>          
+        <div class="row">
+          <div class="col-sm-12">
+            <mat-form-field> 
+              <input matInput type="password" placeholder="Password" id="password" required formControlName="password" [(ngModel)]="userModel.password">
+              <mat-error *ngIf="password.errors && (password.dirty || password.touched)">{{getErrorMsg1()}}</mat-error>
+            </mat-form-field>  
+          </div>  
+        </div>
+        <div class="row">
+          <div class="col-sm-12">
+            <mat-card-actions align="center">
+              <button mat-raised-button class="mat-elevation-z4" color="primary" type="submit" [disabled]="angForm.pristine || angForm.invalid">Save</button>
+            </mat-card-actions>  
+          </div>  
+        </div>  
+    </form>
+  </mat-card-content>  
+</mat-card>

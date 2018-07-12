@@ -12,7 +12,7 @@ export class User {
     email: string;
     name: string;
     password: string;
-    roleid: string;
+    roleid: number;
     is_active: boolean;
     
 }

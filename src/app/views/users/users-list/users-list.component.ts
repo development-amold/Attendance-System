@@ -17,9 +17,9 @@ const ELEMENT_DATA = []
   styleUrls: ['./users-list.component.css']
 })
 export class UsersListComponent implements OnInit, AfterViewInit {
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = new MatTableDataSource(ELEMENT_DATA);
-
+  displayedColumns: string[] = ['srno', 'name', 'email'];
+  // dataSource = new MatTableDataSource();
+    dataSource: any;
 
 
   constructor(
@@ -34,7 +34,8 @@ export class UsersListComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(){
     this._userService.getUsers().subscribe(res => {
-      
+      console.log(res)
+      this.dataSource = res;
     });
     //loads data from here
 

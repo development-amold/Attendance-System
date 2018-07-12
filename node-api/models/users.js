@@ -35,7 +35,7 @@ userSchema.methods.validPassword = function(password) {
 // https://www.npmjs.com/package/jsonwebtoken
 userSchema.methods.generateJwt = function() {  //This data returns each time to client
     var expiry = new Date();
-    expiry.setDate(expiry.getDate() + 7);  //set up 7 days of expiry
+    expiry.setDate(expiry.getDate() + 1);  //set up 7 days of expiry
   
     return jwt.sign({
     //   _id: this._id,
