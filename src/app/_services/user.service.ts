@@ -26,5 +26,14 @@ export class UserService {
     return this.http.post<User>(uri,user)//.map(res => {console.log(res);return res;});    
   }
 
+  deleteUser(id):Observable<User>{
+    const uri = this.api_uri + '/' + environment.API_ENDPOINT.deleteEmployee + '/' + id;
+    return this.http.delete<User>(uri)
+  }  
+
+  toggleActivation(id,togglevalue):Observable<User>{
+    const uri = this.api_uri + '/' + environment.API_ENDPOINT.userActivation + '/' + id;
+    return this.http.post<User>(uri,{toggleVal: togglevalue}) //payload or requested-data must the object
+  }  
 
 }

@@ -70,7 +70,6 @@ import {
 
 import {CdkTableModule} from '@angular/cdk/table';
 
-import { Globalvar } from './_shared/globals';
 import { UsersAddComponent } from './views/users/users-add/users-add.component';
 import { UsersEditComponent } from './views/users/users-edit/users-edit.component';
 import { UsersListComponent } from './views/users/users-list/users-list.component';
@@ -78,6 +77,8 @@ import { AttendanceAddComponent } from './views/users-attendance/attendance-add/
 import { AttendanceEditComponent } from './views/users-attendance/attendance-edit/attendance-edit.component';
 import { AttendanceListComponent } from './views/users-attendance/attendance-list/attendance-list.component';
 import { UserService } from './_services/user.service';
+import { NavigationService } from './_services/navigation.service';
+import { GlobarvarService } from './_services/globarvar.service';
 
 
 @NgModule({
@@ -194,8 +195,9 @@ import { UserService } from './_services/user.service';
     AuthorizeGuard, 
     ButtonService, 
     HomeService, 
-    Globalvar,
+    GlobarvarService,
     UserService,
+    NavigationService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: CommonHttpInterceptor,

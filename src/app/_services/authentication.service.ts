@@ -17,6 +17,7 @@ export interface UserDetails { //this is similar content as that of attendance-s
   name: string;
   exp: number;
   iat: number;
+  is_active: boolean;
 }
 
 interface TokenResponse {

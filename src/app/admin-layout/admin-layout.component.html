@@ -9,7 +9,6 @@
     <mat-sidenav-container autosize style="min-height: 82vh;background-color:  #E9EDF0 !important;">
       <mat-sidenav #sidenav mode="over" [(opened)]="nav_opened">
           <mat-nav-list style="min-height: 98vh;padding-top: 0px;">      
-
             <mat-list-item (click)="navigateLink('/dashboard'); sidenav.close();" [ngClass]="(selectedPath == '/dashboard'? 'active' : 'navbar-list-item-style')">
               <mat-icon mat-list-icon  [ngClass]="(selectedPath == '/dashboard'? 'navbar-list-icon-selected-style' : 'navbar-list-icon-style')" >dashboard</mat-icon>
               <p matLine>Dashboard</p>
@@ -24,7 +23,7 @@
                 </mat-panel-title>
               </mat-expansion-panel-header>
               <mat-list-item *ngIf="panelOpenState === 1"  (click)="navigateLink('/dashboard/employees/new'); sidenav.close();" [ngClass]="(selectedPath == '/dashboard/employees/new'? 'active' : 'navbar-list-item-style')">
-                <mat-icon mat-list-icon [ngClass]="(selectedPath == '/dashboard/employees/new'? 'navbar-list-icon-selected-style' : 'navbar-list-icon-style')">person_add</mat-icon>
+                <mat-icon mat-list-icon [ngClass]="(selectedPath === '/dashboard/employees/new'? 'navbar-list-icon-selected-style' : 'navbar-list-icon-style')">person_add</mat-icon>
                 <p matLine>Add</p>
               </mat-list-item>                        
               <mat-list-item *ngIf="panelOpenState === 1" (click)="navigateLink('/dashboard/employees'); sidenav.close();" [ngClass]="(selectedPath == '/dashboard/employees'? 'active' : 'navbar-list-item-style')">

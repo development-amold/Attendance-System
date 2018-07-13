@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../_services/authentication.service';
+import { NavigationService } from '../_services/navigation.service';
+import { GlobarvarService } from '../_services/globarvar.service';
+
 
 @Component({
   selector: 'app-layout',
@@ -15,37 +18,25 @@ export class AdminLayoutComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private authService: AuthenticationService
+    private authService: AuthenticationService,
+    private navService: NavigationService,
+    private globalvarService: GlobarvarService
   ) 
   { 
+    
     this.selectedPath = localStorage.getItem('selectedPath') || this.selectedPath;
     if(localStorage.getItem("expandedNavMenu")){
       this.panelOpenState = 1;
     }
-    this.setNavActiveClass(window.location.pathname);
+    this.navService.setNavActiveClass(window.location.pathname);
   }
 
   ngOnInit() {
   }
 
-  setNavActiveClass(linkpath){
-    localStorage.setItem('selectedPath', linkpath);
-    this.selectedPath = linkpath;
-    switch(linkpath){
-      case "/dashboard/employees/new":
-      localStorage.setItem("expandedNavMenu", "employees");
-      break;
-      case "/dashboard/employees":
-      localStorage.setItem("expandedNavMenu", "employees");
-      break;      
-      default:
-      this.panelOpenState = 0;
-      localStorage.removeItem("expandedNavMenu");
-    }    
-  }
-
   navigateLink(linkpath){
-    this.setNavActiveClass(linkpath);
+    this.navService.setNavActiveClass(linkpath);
+    this.selectedPath = localStorage.getItem('selectedPath') || this.selectedPath;
     this.router.navigate([linkpath]);
   }
 

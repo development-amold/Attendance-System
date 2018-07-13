@@ -4,6 +4,7 @@ import { User } from '../../../_models/user';
 import { UserService } from '../../../_services/user.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { NavigationService } from '../../../_services/navigation.service';
 
 @Component({
   selector: 'app-users-add',
@@ -28,7 +29,8 @@ export class UsersAddComponent implements OnInit {
   constructor(
     private _userService: UserService,
     private _router: Router,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private navService: NavigationService
   ) {
     this.createFormControls();
     this.createForm();    
@@ -84,12 +86,17 @@ export class UsersAddComponent implements OnInit {
       if(this.name.hasError('required')){
         return "Name is required"
       }
-  }  
+  }
 
   saveUser(){
-    this._userService.addUser(this.userModel).subscribe(() => {
-      this.toastr.success('Employee added successfully', 'Success');
-      this._router.navigate(["/dashboard/employees"]);
+    this._userService.addUser(this.userModel).subscribe(res => {
+      if(res["msgCode"] == "error"){
+        this.toastr.error(res["message"],res["msgCode"]);
+      }else{
+        this.toastr.success(res["message"],res["msgCode"]);
+        this.navService.setNavActiveClass("/dashboard/employees");
+        this._router.navigate(["/dashboard/employees"]);
+      }
     },(err) => {
       console.error(err.message);
     }

@@ -18,6 +18,13 @@ export class CommonHttpInterceptor implements HttpInterceptor {
     ) { }
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+        // console.log("HI HEY--"+req.url.indexOf("/login"));
+        // let authReq = req.clone({ headers: req.headers.set('authorization', `Bearer ${this.authService.getToken()}` ) });
+        // if(req.url.indexOf("/login") == -1){  //if login page not append header
+        //     authReq = req.clone({ headers: req.headers.set('authorization', `Bearer ` ) });
+        // }else{
+        //     authReq = req.clone({ headers: req.headers.set('authorization', `Bearer ${this.authService.getToken()}` ) });
+        // }
         const authReq = req.clone({ headers: req.headers.set('authorization', `Bearer ${this.authService.getToken()}` ) });
         // send the newly created request
         return next.handle(authReq).do((event: HttpEvent<any>) => {

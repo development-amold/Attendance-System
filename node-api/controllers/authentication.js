@@ -9,7 +9,7 @@ var sendJSONresponse = function(res, status, content) {
 
 module.exports.register = function(req, res) {
   if(!req.body.name || !req.body.email || !req.body.password) {
-    sendJSONresponse(res, 400, {
+    sendJSONresponse(res, 422, {
       "message": "All fields required"
     });
     return;
@@ -23,7 +23,7 @@ module.exports.register = function(req, res) {
     user.save(function(err) {
       var token;
       token = user.generateJwt();
-      res.status(200);
+      res.status(201);
       res.json({
         "token" : token
       });
@@ -33,12 +33,6 @@ module.exports.register = function(req, res) {
 
 module.exports.login = function(req, res) {
 
-  // if(!req.body.email || !req.body.password) {
-  //   sendJSONresponse(res, 400, {
-  //     "message": "All fields required"
-  //   });
-  //   return;
-  // }
 
   passport.authenticate('local', function(err, user, info){  //it validated the localServer as we can use "google", "facebook", "github" thirdparty strategies i.e. provider strategy 
 
@@ -52,8 +46,8 @@ module.exports.login = function(req, res) {
       token = user.generateJwt();
       sendJSONresponse(res, 200, {"token" : token});
     } else {
-      // If user is not found
-      sendJSONresponse(res, 401, info); //getting data from passport.js
+      // If user is not found or disabled
+      sendJSONresponse(res, 422, info); //getting data from passport.js
     }
   })(req, res);
 

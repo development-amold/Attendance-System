@@ -15,7 +15,7 @@ var auth = jwt({
     }
     return null;
   }
-}).unless({path: ['/login']});
+}).unless({path: ['/api/login']});
 
 // var ctrlProfile = require('../controllers/profile');
 // const ctrlHome = require('../controllers/home');router.get('/employees', ctrlUsers.getusers);
@@ -23,10 +23,14 @@ var auth = jwt({
 const ctrlAuth = require('../controllers/authentication');
 const ctrlUsers = require("../controllers/users");
 
-router.post('/login', ctrlAuth.login);
+router.post('/login',auth, ctrlAuth.login);
 
 router.get('/employees', auth, ctrlUsers.getusers);
 router.post('/addEmployee',auth, ctrlUsers.addUser);  //pls mention POST method else it will waiting the request
+router.delete('/deleteEmployee/:id',auth, ctrlUsers.deleteUser);
+router.post('/userActivation/:id', auth, ctrlUsers.userActivation);
+
+
 
 // profile
 // router.get('/profile', auth, ctrlProfile.profileRead);

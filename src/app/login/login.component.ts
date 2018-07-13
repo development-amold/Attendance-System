@@ -4,7 +4,6 @@ import { TokenPayload, AuthenticationService, UserDetails } from '../_services/a
 import { Router } from '@angular/router';
 import { ButtonService } from '../_services/button.service';
 import { ToastrService } from 'ngx-toastr';
-import { Globalvar } from '../_shared/globals';
 
 @Component({
   selector: 'app-login',

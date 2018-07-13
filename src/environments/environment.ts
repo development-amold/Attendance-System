@@ -11,6 +11,8 @@ export const environment = {
     logout: "logout",
     employees: "employees",
     addEmployee: "addEmployee",
+    deleteEmployee: "deleteEmployee",
+    userActivation: "userActivation",
     addAttendance: "addAttendance"
 
   }

@@ -5,6 +5,7 @@ var User = mongoose.model('User');
 
 // http://www.passportjs.org/docs/downloads/html/ ==> Passport mostly useful to login google, fb, linkedin i.e. accessing third party API from our website
 
+// this is authenticate method of passport calling from authentication.js
 passport.use(new LocalStrategy({
     usernameField: 'email'
   },
@@ -14,7 +15,7 @@ passport.use(new LocalStrategy({
       // Return if user not found in database
       if (!user) {
         return done(null, false, {
-          message: 'User not found'
+          message: 'Employee not found'
         });
       }
       // Return if password is wrong
@@ -23,6 +24,13 @@ passport.use(new LocalStrategy({
           message: 'Password is wrong'
         });
       }
+
+      if (!user.is_active) {
+        return done(null, false, {
+          message: 'Your account suspended !'
+        });
+      }      
+
       // If credentials are correct, return the user object
       return done(null, user);
     });

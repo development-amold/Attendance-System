@@ -43,6 +43,7 @@ userSchema.methods.generateJwt = function() {  //This data returns each time to 
       email: this.email,
       name: this.name,
       roleid: this.roleid,
+      is_active: this.is_active,
       exp: parseInt(expiry.getTime() / 1000),
     }, "MY_SERVER_SECRET_KEY"); // DO NOT KEEP YOUR SECRET IN THE CODE!
 };

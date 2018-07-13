@@ -16,6 +16,26 @@
     <mat-cell *matCellDef="let element"> {{element.email}} </mat-cell>
   </ng-container>
 
+  <ng-container matColumnDef="actions" class="action-list">
+      <mat-header-cell *matHeaderCellDef class="action-list">Actions</mat-header-cell>
+      <mat-cell *matCellDef="let element" class="action-list">
+        <button *ngIf="element.is_active" mat-icon-button color="primary" (click)='toggleActivation(element)'>
+            <mat-icon md-18 aria-label="icon-button with a show icon">visibility</mat-icon>
+        </button>
+        <button *ngIf="!element.is_active" mat-icon-button color="primary" (click)='toggleActivation(element)'>
+            <mat-icon md-18 aria-label="icon-button with a show icon">visibility_off</mat-icon>
+        </button>          
+          
+          <!-- <button mat-icon-button color="primary" (click)='editUser(element)'>
+              <mat-icon md-18 aria-label="icon-button with a edit icon">edit</mat-icon>
+          </button> -->
+          <button mat-icon-button color="warn" (click)='deleteUser(element)'>
+              <mat-icon md-18 aria-label="icon-button with a delete icon">delete</mat-icon>
+          </button>
+      </mat-cell>
+  </ng-container>    
+
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
   <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
 </mat-table>

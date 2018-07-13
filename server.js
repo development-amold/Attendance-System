@@ -25,7 +25,7 @@ const express = require('express'),
         err => { console.log('Can not connect to the database: '+ err)}
     );
 
-    // require('./node-api/models/seed');  // putting here so its called after db conn made & will comment once its set up completed
+    require('./node-api/models/seed');  // putting here so its called after db conn made & will comment once its set up completed
 
     //   scheme://username:password@host:port/database
     //  Production Heroku URL: mongodb://heroku_ff4kqnxp:5vppf5fkcfsri34i4scnjf26cr@ds157089.mlab.com:57089/heroku_ff4kqnxp'
