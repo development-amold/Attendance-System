@@ -16,9 +16,10 @@ export class UserService {
     private http: HttpClient,
   ) { }
 
-  getUsers() {
-    const uri = this.api_uri + '/' + environment.API_ENDPOINT.employees;
-    return this.http.get(uri).map(res => {return res;});
+  getUsers(sortCol: string, sortOrder: string, pageIndex: number, pageLimit: number): Observable<any>  {
+    const uri_endpoint = this.api_uri + '/' + environment.API_ENDPOINT.employees;
+    const reqUrl = `${uri_endpoint}?sortCol=${sortCol}&sortOrder=${sortOrder}&pageIndex=${pageIndex}&pageLimit=${pageLimit}`;
+    return this.http.get(reqUrl).map(res => {return res;});
   }  
 
   addUser(user: User):Observable<User>{

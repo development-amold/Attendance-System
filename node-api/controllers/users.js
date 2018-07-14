@@ -9,10 +9,71 @@ var sendJSONresponse = function(res, status, content) {
 module.exports.getusers = function(req, res){
     // Get all users with selected column name & email
     // find({},{})  => first {} contains conditions & {} contains the list of columns that needs to return
-    User.find({roleid: 3},{name: true,email: true,is_active: true}).exec(function(err, users) {
-        res.status(200).json(users);
+    
+    var pageIndex = parseInt(req.query.pageIndex);
+    var pageLimit = parseInt(req.query.pageLimit);
+    var sort_data = {};
+    sort_data[`${req.query.sortCol}`] = req.query.sortOrder;
+
+    var p1 = new Promise(function(resolve, reject) {
+        User.count({roleid: 3}).then(function(userCount){  
+            // console.log("PRoMISE"+userCount);
+            if(userCount > 0){
+                resolve(userCount);
+            }
+        })
+    }).catch(err => {
+        console.log("ErrMsg--"+err.message)
     });
+
+    p1.then(function(resolve_user_count,reject){
+        User.find({roleid: 3},{name: true,email: true,is_active: true},
+            {
+                skip: pageIndex*pageLimit, limit: pageLimit,sort: sort_data
+            }).exec(function(err, users) {
+            if(err){
+                sendJSONresponse(res, 422, {
+                    "msgCode": "error",
+                    "message": err.message
+                });
+            }else{
+                sendJSONresponse(res, 200, {
+                    "msgCode": "success",
+                    users_data: users,
+                    total_users_count: resolve_user_count
+                });
+            }
+        });        
+    }).catch(err => {console.log(err)});
+
+    // User.find({roleid: 3},{name: true,email: true,is_active: true},
+    //     {
+    //         skip: pageIndex*pageLimit, limit: pageLimit,sort: sort_data
+    //     }).exec(function(err, users) {
+    //         console.log("TESTING-----------dmfaldksjlaksdjlaksdjlakjskajs")
+    //     if(err){
+    //         sendJSONresponse(res, 422, {
+    //             "msgCode": "error",
+    //             "message": err.message
+    //         });
+    //     }else{
+    //         sendJSONresponse(res, 200, {
+    //             "msgCode": "success",
+    //             users_data: users,
+    //             total_users_count: 0
+    //         });
+    //     }
+    // });
 }
+
+function get_active_users_count(){
+    User.count({roleid: 3},function(err,userCount){  
+        if(userCount > 0){
+            return userCount;
+        }
+    }); 
+};
+
 
 module.exports.deleteUser = function(req, res){
     User.findByIdAndRemove({_id: req.params.id}, function(err, user){
@@ -47,10 +108,7 @@ module.exports.userActivation = function(req, res){
                 });                
             }
             else{
-                console.log(req.body)
                 user.is_active = req.body.toggleVal
-                console.log(user.is_active);
-                console.log(user);
                 user.save(function(user_err,user_res){
                     if(user_err){
                         sendJSONresponse(res, 422, {
