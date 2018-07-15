@@ -37,4 +37,11 @@ export class UserService {
     return this.http.post<User>(uri,{toggleVal: togglevalue}) //payload or requested-data must the object
   }  
 
+  getLoginRecords(sortCol: string, sortOrder: string, pageIndex: number, pageLimit: number): Observable<any>  {
+    const uri_endpoint = this.api_uri + '/' + environment.API_ENDPOINT.login_records;
+    const reqUrl = `${uri_endpoint}?sortCol=${sortCol}&sortOrder=${sortOrder}&pageIndex=${pageIndex}&pageLimit=${pageLimit}`;
+    return this.http.get(reqUrl).map(res => {return res;});
+  }
+  
+
 }

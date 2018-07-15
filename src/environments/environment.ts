@@ -13,7 +13,8 @@ export const environment = {
     addEmployee: "addEmployee",
     deleteEmployee: "deleteEmployee",
     userActivation: "userActivation",
-    addAttendance: "addAttendance"
+    addAttendance: "addAttendance",
+    login_records: "login_records"
 
   }
 };

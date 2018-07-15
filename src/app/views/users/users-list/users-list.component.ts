@@ -12,15 +12,6 @@ import { Subject } from 'rxjs/Subject';
 import { catchError, map, tap, startWith, switchMap } from 'rxjs/operators';
 
 
-// export interface PeriodicElement {
-//   name: string;
-//   position: number;
-//   weight: number;
-//   symbol: string;
-// }
-
-const ELEMENT_DATA = []
-
 @Component({
   selector: 'app-users-list',
   templateUrl: './users-list.component.html',
