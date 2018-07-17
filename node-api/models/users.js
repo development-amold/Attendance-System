@@ -35,8 +35,7 @@ userSchema.methods.validPassword = function(password) {
 // https://www.npmjs.com/package/jsonwebtoken
 userSchema.methods.generateJwt = function() {  //This data returns each time to client
     var expiry = new Date();
-    expiry.setDate(expiry.getDate() + 1);  //set up 7 days of expiry
-  
+    expiry.setDate(expiry.getDate() + 7);  //set up 7 days of expiry
     return jwt.sign({
     //   _id: this._id,
       id: this.id,
@@ -44,7 +43,7 @@ userSchema.methods.generateJwt = function() {  //This data returns each time to 
       name: this.name,
       roleid: this.roleid,
       is_active: this.is_active,
-      exp: parseInt(expiry.getTime() / 1000),
+      exp: parseInt(expiry.getTime()),    //parseInt(expiry.getTime() + 90*1000) //set up expiry time for 90seconds
     }, "MY_SERVER_SECRET_KEY"); // DO NOT KEEP YOUR SECRET IN THE CODE!
 };
 

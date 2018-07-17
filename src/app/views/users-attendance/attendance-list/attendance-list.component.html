@@ -1,44 +1,42 @@
-<mat-table #table [dataSource]="dataSource" matSort matSortActive="name" matSortDirection="asc" matSortDisableClear>
+<mat-table #table [dataSource]="dataSource" matSort matSortActive="email" matSortDirection="asc" matSortDisableClear>
     <ng-container matColumnDef="srno">
       <mat-header-cell *matHeaderCellDef class="index-list">#</mat-header-cell>
       <mat-cell *matCellDef="let element; let rIndex = index;" class="index-list"> {{rIndex+1}} </mat-cell>
     </ng-container>
   
-    <!-- Name Column -->
-    <ng-container matColumnDef="name">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.user_id}} </mat-cell>
+    <ng-container matColumnDef="email">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Email</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.user_id.email}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="login_date">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> Login Date </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.login_date}} </mat-cell>
-      </ng-container>      
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Login Date</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.login_date | date: "dd-LL-yyyy"}} </mat-cell>
+    </ng-container>      
+    <ng-container matColumnDef="inTime">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>In-Time</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.in_time | date: "HH:mm"}} </mat-cell>
+    </ng-container>
 
     <ng-container matColumnDef="outTime">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> Out-Time </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.task}} </mat-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Out-Time</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.out_time | date: "HH:mm"}} </mat-cell>
     </ng-container>
 
-    <ng-container matColumnDef="inTime">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> In-Time </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.user_id}} </mat-cell>
-    </ng-container>
-  
     <ng-container matColumnDef="actions" class="action-list">
         <mat-header-cell *matHeaderCellDef class="action-list">Actions</mat-header-cell>
         <mat-cell *matCellDef="let element" class="action-list">
           <button *ngIf="element.is_active" mat-icon-button color="primary" (click)='toggleActivation(element)'>
               <mat-icon md-18 aria-label="icon-button with a show icon">visibility</mat-icon>
           </button>
-          <button *ngIf="!element.is_active" mat-icon-button color="primary" (click)='toggleActivation(element)'>
+          <!-- <button *ngIf="!element.is_active" mat-icon-button color="primary" (click)='toggleActivation(element)'>
               <mat-icon md-18 aria-label="icon-button with a show icon">visibility_off</mat-icon>
-          </button>          
+          </button>     -->
             
             <!-- <button mat-icon-button color="primary" (click)='editUser(element)'>
                 <mat-icon md-18 aria-label="icon-button with a edit icon">edit</mat-icon>
             </button> -->
-            <button mat-icon-button color="warn" (click)='deleteUser(element)'>
+            <button mat-icon-button color="warn" (click)='deleteRecord(element)'>
                 <mat-icon md-18 aria-label="icon-button with a delete icon">delete</mat-icon>
             </button>
         </mat-cell>

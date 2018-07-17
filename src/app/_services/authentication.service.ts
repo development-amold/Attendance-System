@@ -15,8 +15,8 @@ export interface UserDetails { //this is similar content as that of attendance-s
   email: string;
   roleid: number;
   name: string;
-  exp: number;
-  iat: number;
+  exp: number; // expiry time im milliseconds
+  iat: number; //created_at or issued_at
   is_active: boolean;
 }
 
@@ -68,19 +68,20 @@ export class AuthenticationService {
 
   public isLoggedIn(): boolean {
     const user = this.getUserDetails();
+    var current_date_time = new Date().getTime();
     if (user) {
-      if (user.exp > Date.now() / 1000)
+      if (user.exp > (current_date_time))  //current_date_time greater than expiry date time
       {
-        this._buttonService.updateLoginStatus(true);
+        // this._buttonService.updateLoginStatus(true);
         return true;
       }
       else
       {
-        this._buttonService.updateLoginStatus(false);
+        // this._buttonService.updateLoginStatus(false);
         return false;
       }
     } else {
-      this._buttonService.updateLoginStatus(false);
+      // this._buttonService.updateLoginStatus(false);
       return false;
     }
   }

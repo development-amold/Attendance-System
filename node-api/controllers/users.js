@@ -45,35 +45,7 @@ module.exports.getusers = function(req, res){
             }
         });        
     }).catch(err => {console.log(err)});
-
-    // User.find({roleid: 3},{name: true,email: true,is_active: true},
-    //     {
-    //         skip: pageIndex*pageLimit, limit: pageLimit,sort: sort_data
-    //     }).exec(function(err, users) {
-    //         console.log("TESTING-----------dmfaldksjlaksdjlaksdjlakjskajs")
-    //     if(err){
-    //         sendJSONresponse(res, 422, {
-    //             "msgCode": "error",
-    //             "message": err.message
-    //         });
-    //     }else{
-    //         sendJSONresponse(res, 200, {
-    //             "msgCode": "success",
-    //             users_data: users,
-    //             total_users_count: 0
-    //         });
-    //     }
-    // });
 }
-
-function get_active_users_count(){
-    User.count({roleid: 3},function(err,userCount){  
-        if(userCount > 0){
-            return userCount;
-        }
-    }); 
-};
-
 
 module.exports.deleteUser = function(req, res){
     User.findByIdAndRemove({_id: req.params.id}, function(err, user){

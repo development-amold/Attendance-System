@@ -16,8 +16,7 @@ export class AuthorizeGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean 
     {
-      const token = localStorage.getItem('access_token');
-      if (token && token !== '' && token !== null && token !== 'null') {
+      if (this.authService.isLoggedIn()) {  // it includes valid token & expiry time
         this.current_user = this.authService.getUserDetails();
         if(this.current_user.roleid == 2 && next.data.ui == "frontend"){
           //we can chk roles using only ui property but for security we've taken servers roleid also
@@ -33,6 +32,7 @@ export class AuthorizeGuard implements CanActivate {
         }
       }
       else{
+        localStorage.removeItem('access_token');
         this.router.navigate(['/login']);
         return false;
       }

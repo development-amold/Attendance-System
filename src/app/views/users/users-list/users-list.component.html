@@ -1,7 +1,7 @@
 <mat-table #table [dataSource]="dataSource" matSort matSortActive="email" matSortDirection="asc" matSortDisableClear>
   <ng-container matColumnDef="srno">
     <mat-header-cell *matHeaderCellDef class="index-list">#</mat-header-cell>
-    <mat-cell *matCellDef="let element; let rIndex = index;" class="index-list"> {{rIndex+1}} </mat-cell>
+    <mat-cell *matCellDef="let element; let rIndex = index;" class="index-list"> {{rIndex+1}}</mat-cell>
   </ng-container>
 
   <!-- Name Column -->

@@ -34,8 +34,9 @@ export class CommonHttpInterceptor implements HttpInterceptor {
                 if (err.status === 401) {
                     this.toastr.clear();
                     console.log('CommonHttpInterceptor - Response :: Unauthorized');
-                    this.toastr.error('UnauthorizedError: invalid token', 'Error');
-                    this.router.navigate(['login']);                    
+                    this.toastr.error('Invalid token', 'Unauthorized');
+                    localStorage.removeItem("access_token");  //to avoid access of internal pages
+                    this.router.navigate(['login']);
                     // this.toastr.clear();
                     return null;
                 }

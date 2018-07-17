@@ -10,6 +10,7 @@ import { of as observableOf } from 'rxjs/observable/of';
 import { Subject } from 'rxjs/Subject';
 import { catchError, map, tap, startWith, switchMap } from 'rxjs/operators';
 import { LoginRecord } from '../../../_models/loginRecord';
+import {GlobarvarService} from '../../../_services/globarvar.service';
 
 @Component({
   selector: 'app-attendance-list',
@@ -18,7 +19,7 @@ import { LoginRecord } from '../../../_models/loginRecord';
 })
 export class AttendanceListComponent implements OnInit, AfterViewInit {
 
-  displayedColumns: string[] = ['srno', 'name','login_date','inTime','outTime','actions'];
+  displayedColumns: string[] = ['srno', 'email','login_date','inTime','outTime','actions'];
 
   loginRecords_data: LoginRecord [];
   length = 0;
@@ -33,8 +34,11 @@ export class AttendanceListComponent implements OnInit, AfterViewInit {
 
   constructor(
     private _userService: UserService,
-    private toastr: ToastrService   
-  ) { }
+    private toastr: ToastrService,
+    private _globalService: GlobarvarService
+  ) { 
+    
+  }
 
   ngOnInit() {
   }
@@ -130,6 +134,20 @@ export class AttendanceListComponent implements OnInit, AfterViewInit {
 
   }
 
+  deleteRecord(login_record):void{
+    if(confirm("Are you sure want to delete?")){
+      this._userService.deleteloginRecord(login_record._id).subscribe(res => {
+        if(res["msgCode"] == "error"){
+          this.toastr.error(res["message"],res["msgCode"]);
+        }else{
+          this.ngAfterViewInit();
+          this.toastr.success(res["message"],res["msgCode"]);
+        }
+      },(err) => {
+        console.log(err.message)
+      });
+    }
+  }
 
 
 

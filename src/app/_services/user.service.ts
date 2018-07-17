@@ -42,6 +42,11 @@ export class UserService {
     const reqUrl = `${uri_endpoint}?sortCol=${sortCol}&sortOrder=${sortOrder}&pageIndex=${pageIndex}&pageLimit=${pageLimit}`;
     return this.http.get(reqUrl).map(res => {return res;});
   }
+
+  deleteloginRecord(id){
+    const uri = this.api_uri + '/' + environment.API_ENDPOINT.deleteLoginRecord + '/' + id;
+    return this.http.delete(uri);
+  }
   
 
 }

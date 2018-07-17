@@ -31,7 +31,8 @@ router.post('/addEmployee',auth, ctrlUsers.addUser);  //pls mention POST method 
 router.delete('/deleteEmployee/:id',auth, ctrlUsers.deleteUser);
 router.post('/userActivation/:id', auth, ctrlUsers.userActivation);
 router.get('/login_records/', auth, ctrlLoginRecord.login_records);
-
+router.post('/login_records_add', auth, ctrlLoginRecord.login_recordsAdd)
+router.delete('/deleteLoginRecord/:id',auth, ctrlLoginRecord.deleteLoginRecord);
 
 
 // profile
