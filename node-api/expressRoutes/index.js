@@ -32,7 +32,8 @@ router.delete('/deleteEmployee/:id',auth, ctrlUsers.deleteUser);
 router.post('/userActivation/:id', auth, ctrlUsers.userActivation);
 router.get('/login_records/', auth, ctrlLoginRecord.login_records);
 router.post('/login_records_add', auth, ctrlLoginRecord.login_recordsAdd)
-router.delete('/deleteLoginRecord/:id',auth, ctrlLoginRecord.deleteLoginRecord);
+router.get('/get_login_record/:login_record_id', auth, ctrlLoginRecord.login_recordsView)
+router.delete('/deleteLoginRecord/:user_id/:login_record_id',auth, ctrlLoginRecord.deleteLoginRecord);
 
 
 // profile

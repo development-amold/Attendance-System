@@ -65,6 +65,7 @@ import {
   MatTabsModule,
   MatToolbarModule,
   MatTooltipModule,
+  MAT_DATE_FORMATS,
   // MatTreeModule,  
 } from '@angular/material';
 
@@ -79,7 +80,8 @@ import { AttendanceListComponent } from './views/users-attendance/attendance-lis
 import { UserService } from './_services/user.service';
 import { NavigationService } from './_services/navigation.service';
 import { GlobarvarService } from './_services/globarvar.service';
-
+import { AmazingTimePickerModule } from 'amazing-time-picker';
+import { AttendanceShowComponent } from './views/users-attendance/attendance-show/attendance-show.component';
 
 @NgModule({
   declarations: [
@@ -99,7 +101,8 @@ import { GlobarvarService } from './_services/globarvar.service';
     UsersListComponent,
     AttendanceAddComponent,
     AttendanceEditComponent,
-    AttendanceListComponent
+    AttendanceListComponent,
+    AttendanceShowComponent
   ],
   imports: [
     BrowserModule, 
@@ -144,6 +147,7 @@ import { GlobarvarService } from './_services/globarvar.service';
     MatTabsModule,
     MatToolbarModule,
     MatTooltipModule,
+    AmazingTimePickerModule,
     // MatTreeModule,
     ToastrModule.forRoot({ // toastr global settings
       positionClass: 'toast-top-center',
@@ -188,6 +192,8 @@ import { GlobarvarService } from './_services/globarvar.service';
     MatTabsModule,
     MatToolbarModule,
     MatTooltipModule,
+
+    
     // MatTreeModule    
   ],
   providers: [
@@ -202,8 +208,23 @@ import { GlobarvarService } from './_services/globarvar.service';
       provide: HTTP_INTERCEPTORS,
       useClass: CommonHttpInterceptor,
       multi: true
-    }
+    },
+    // { 
+    //   provide: MAT_DATE_FORMATS, 
+    //   useValue: {
+    //     parse: {
+    //       dateInput: 'LL',
+    //     },
+    //     display: {
+    //       dateInput: 'LL',
+    //       monthYearLabel: 'MMM YYYY',
+    //       dateA11yLabel: 'LL',
+    //       monthYearA11yLabel: 'MMMM YYYY',
+    //     },
+    //   }
+    // },
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+
+export class AppModule {}

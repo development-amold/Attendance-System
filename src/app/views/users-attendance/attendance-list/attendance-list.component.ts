@@ -11,6 +11,8 @@ import { Subject } from 'rxjs/Subject';
 import { catchError, map, tap, startWith, switchMap } from 'rxjs/operators';
 import { LoginRecord } from '../../../_models/loginRecord';
 import {GlobarvarService} from '../../../_services/globarvar.service';
+import { AuthenticationService } from '../../../_services/authentication.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-attendance-list',
@@ -18,12 +20,12 @@ import {GlobarvarService} from '../../../_services/globarvar.service';
   styleUrls: ['./attendance-list.component.css']
 })
 export class AttendanceListComponent implements OnInit, AfterViewInit {
-
-  displayedColumns: string[] = ['srno', 'email','login_date','inTime','outTime','actions'];
+  current_user: any;
+  displayedColumns: string[];
 
   loginRecords_data: LoginRecord [];
   length = 0;
-  pageSize = 5;
+  pageSize = 10;
   pageSizeOptions = [5, 10, 25, 100];
 
   dataSource = new MatTableDataSource();    
@@ -31,13 +33,20 @@ export class AttendanceListComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) myPaginator: MatPaginator;
   @ViewChild(MatSort) mySort: MatSort;    
 
-
   constructor(
     private _userService: UserService,
     private toastr: ToastrService,
-    private _globalService: GlobarvarService
-  ) { 
-    
+    private _globalService: GlobarvarService,
+    private authService: AuthenticationService,
+    private _router: Router
+  ) 
+  { 
+    this.current_user = this.authService.getUserDetails();
+    if(this.current_user.roleid == 3){
+      this.displayedColumns = ['srno', 'login_date','inTime','outTime','actions'];
+    }else{
+      this.displayedColumns = ['srno', 'email', 'login_date','inTime','outTime','actions'];
+    }
   }
 
   ngOnInit() {
@@ -65,10 +74,10 @@ export class AttendanceListComponent implements OnInit, AfterViewInit {
               // this.isRateLimitReached = false;
               this.loginRecords_data = _response.loginRecords_data;
               this.length  = (_response.total_rec_count ? _response.total_rec_count : 0);  //total users count
-              console.log(this.loginRecords_data)
+              // console.log(this.loginRecords_data)
               return this.loginRecords_data;
             } else {
-              console.log(_response)
+              // console.log(_response)
               try {
                 // this.toastr.error(this.rSM.resMsg[_response.status][this.globals.lang],
                   // this.rSM.genericsMsg.errorTitile[this.globals.lang]);
@@ -134,9 +143,17 @@ export class AttendanceListComponent implements OnInit, AfterViewInit {
 
   }
 
-  deleteRecord(login_record):void{
+  showLoginRecord(element){
+    this._router.navigate([`/attendance/${element.login_recordsid}`]);
+  }
+
+  editLoginRecord(element){
+
+  }
+
+  deleteRecord(userid,login_recordid):void{
     if(confirm("Are you sure want to delete?")){
-      this._userService.deleteloginRecord(login_record._id).subscribe(res => {
+      this._userService.deleteloginRecord(userid,login_recordid).subscribe(res => {
         if(res["msgCode"] == "error"){
           this.toastr.error(res["message"],res["msgCode"]);
         }else{

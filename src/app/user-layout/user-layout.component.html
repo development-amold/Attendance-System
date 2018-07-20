@@ -1,5 +1,55 @@
 <div class="container-fluid">
-  <app-user-header></app-user-header>
-  <router-outlet></router-outlet>
-  <app-user-footer></app-user-footer>
+    <!-- <app-user-header></app-user-header> -->
+    <div class="mat-elevation-z2" style="background-color: #188ED4">
+      <div class="page-footer font-small blue">
+        <div class="footer-copyright py-3" style="background-color: #188ED4">
+          <button *ngIf="!nav_opened" mat-icon-button (click)="sidenav.open()"><mat-icon>menu</mat-icon></button>
+          <button *ngIf="nav_opened"mat-icon-button (click)="sidenav.close()"><mat-icon>close</mat-icon></button>
+          <button style="float: right; margin-top: 4px; margin-right: 25px; font-weight: 600" class="btn btn-sm" (click)="logout()">LogOut</button>
+        </div>
+      </div>
+
+    <!--SIDEBAR-->
+    <mat-sidenav-container autosize style="min-height: 82vh;background-color:  #E9EDF0 !important;">
+      <mat-sidenav #sidenav mode="over" [(opened)]="nav_opened">
+        <mat-nav-list style="min-height: 98vh;padding-top: 0px;"> 
+          <mat-list-item>
+            <mat-icon mat-list-icon>person</mat-icon>
+            <p matLine>{{current_user.email}}</p>
+          </mat-list-item>
+          <mat-divider></mat-divider>            
+          <mat-list-item (click)="navigateLink('/home'); sidenav.close();" [ngClass]="(selectedPath == '/home'? 'active' : 'navbar-list-item-style')">
+            <mat-icon mat-list-icon  [ngClass]="(selectedPath == '/home'? 'navbar-list-icon-selected-style' : 'navbar-list-icon-style')" >dashboard</mat-icon>
+            <p matLine>Dashboard</p>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          
+          <mat-expansion-panel [expanded]="panelOpenState === 1" (opened)="panelOpenState = 1">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <mat-icon mat-list-icon>date_range</mat-icon>
+                <span style="padding-left: 14px;">Attendance</span>                  
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <mat-list-item *ngIf="panelOpenState === 1"  (click)="navigateLink('/attendance/new'); sidenav.close();" [ngClass]="(selectedPath == '/attendance/new'? 'active' : 'navbar-list-item-style')">
+              <mat-icon mat-list-icon [ngClass]="(selectedPath === '/attendance/new'? 'navbar-list-icon-selected-style' : 'navbar-list-icon-style')">note_add</mat-icon>
+              <p matLine>Add</p>
+            </mat-list-item>                        
+            <mat-list-item *ngIf="panelOpenState === 1" (click)="navigateLink('/attendance'); sidenav.close();" [ngClass]="(selectedPath == '/attendance'? 'active' : 'navbar-list-item-style')">
+              <mat-icon mat-list-icon [ngClass]="(selectedPath == '/attendance'? 'navbar-list-icon-selected-style' : 'navbar-list-icon-style')">view_column</mat-icon>
+              <p matLine>List</p>
+            </mat-list-item>              
+          </mat-expansion-panel>
+          <mat-divider></mat-divider>
+        </mat-nav-list>  
+      </mat-sidenav>
+
+      <mat-sidenav-content>
+        <router-outlet></router-outlet>
+      </mat-sidenav-content>
+    </mat-sidenav-container> 
+
+    <app-user-footer></app-user-footer>
 </div>
+
+

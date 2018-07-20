@@ -13,7 +13,9 @@ export const environment = {
     addEmployee: "addEmployee",
     deleteEmployee: "deleteEmployee",
     userActivation: "userActivation",
-    addAttendance: "addAttendance",
+    addAttendance: "login_records_add",
+    viewAttendance: "get_login_record",
+    editAttendance: "edit_login_record",
     login_records: "login_records",
     deleteLoginRecord: "deleteLoginRecord"
 

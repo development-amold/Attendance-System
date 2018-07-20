@@ -6,7 +6,7 @@
   
     <ng-container matColumnDef="email">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Email</mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.user_id.email}} </mat-cell>
+      <mat-cell *matCellDef="let element"> {{element.email}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="login_date">
@@ -26,19 +26,15 @@
     <ng-container matColumnDef="actions" class="action-list">
         <mat-header-cell *matHeaderCellDef class="action-list">Actions</mat-header-cell>
         <mat-cell *matCellDef="let element" class="action-list">
-          <button *ngIf="element.is_active" mat-icon-button color="primary" (click)='toggleActivation(element)'>
-              <mat-icon md-18 aria-label="icon-button with a show icon">visibility</mat-icon>
+          <button mat-icon-button color="primary" (click)='showLoginRecord(element)'>
+            <mat-icon md-18 aria-label="icon-button with a show icon">visibility</mat-icon>
+          </button>          
+          <button mat-icon-button color="primary" (click)='editLoginRecord(element)'>
+            <mat-icon md-18 aria-label="icon-button with a edit icon">edit</mat-icon>
           </button>
-          <!-- <button *ngIf="!element.is_active" mat-icon-button color="primary" (click)='toggleActivation(element)'>
-              <mat-icon md-18 aria-label="icon-button with a show icon">visibility_off</mat-icon>
-          </button>     -->
-            
-            <!-- <button mat-icon-button color="primary" (click)='editUser(element)'>
-                <mat-icon md-18 aria-label="icon-button with a edit icon">edit</mat-icon>
-            </button> -->
-            <button mat-icon-button color="warn" (click)='deleteRecord(element)'>
-                <mat-icon md-18 aria-label="icon-button with a delete icon">delete</mat-icon>
-            </button>
+          <button mat-icon-button color="warn" (click)='deleteRecord(element._id,element.login_recordsid)'>
+            <mat-icon md-18 aria-label="icon-button with a delete icon">delete</mat-icon>
+          </button>
         </mat-cell>
     </ng-container>    
   

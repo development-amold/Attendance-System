@@ -13,6 +13,7 @@ import { UsersEditComponent } from './views/users/users-edit/users-edit.componen
 import { AttendanceAddComponent } from './views/users-attendance/attendance-add/attendance-add.component';
 import { AttendanceListComponent } from './views/users-attendance/attendance-list/attendance-list.component';
 import { AttendanceEditComponent } from './views/users-attendance/attendance-edit/attendance-edit.component';
+import { AttendanceShowComponent } from './views/users-attendance/attendance-show/attendance-show.component';
 
 
 export const appRoutes: Routes = [
@@ -21,6 +22,10 @@ export const appRoutes: Routes = [
     children:[
       {path: '',component: HomeComponent},
       {path: 'home',component: HomeComponent},
+      {path: 'attendance', component: AttendanceListComponent},
+      {path: 'attendance/new', component: AttendanceAddComponent},
+      {path: 'attendance/edit/:id', component: AttendanceEditComponent},
+      {path: 'attendance/:id', component: AttendanceShowComponent}
     ]
   }, // end of frontend
   {

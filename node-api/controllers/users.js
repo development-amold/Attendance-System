@@ -47,22 +47,6 @@ module.exports.getusers = function(req, res){
     }).catch(err => {console.log(err)});
 }
 
-module.exports.deleteUser = function(req, res){
-    User.findByIdAndRemove({_id: req.params.id}, function(err, user){
-        if(err){
-            sendJSONresponse(res, 422, {
-                "msgCode": "error",
-                "message": err.message
-            });
-        }else{
-            sendJSONresponse(res, 200, {
-                "msgCode": "success",
-                "message": "User deleted successfully"
-            });
-        }
-    });
-}
-
 module.exports.userActivation = function(req, res){
     User.findById(req.params.id, function(err, user){
         if(err){
@@ -146,4 +130,20 @@ module.exports.addUser = function(req, res){
             }
         });
     }  
+}
+
+module.exports.deleteUser = function(req, res){
+    User.findByIdAndRemove({_id: req.params.id}, function(err, user){
+        if(err){
+            sendJSONresponse(res, 422, {
+                "msgCode": "error",
+                "message": err.message
+            });
+        }else{
+            sendJSONresponse(res, 200, {
+                "msgCode": "success",
+                "message": "User deleted successfully"
+            });
+        }
+    });
 }

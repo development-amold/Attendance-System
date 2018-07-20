@@ -13,7 +13,14 @@ export class NavigationService {
       break;
       case "/dashboard/employees":
       localStorage.setItem("expandedNavMenu", "employees");
+
+      case "/attendance/new":
+      localStorage.setItem("expandedNavMenu", "attendance");
+      break;
+      case "/attendance":
+      localStorage.setItem("expandedNavMenu", "attendance");
       break;      
+      
       default:
       this.panelOpenState = 0;
       localStorage.removeItem("expandedNavMenu");

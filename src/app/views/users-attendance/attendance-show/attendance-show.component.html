@@ -1,0 +1,17 @@
+<mat-card class="mat-elevation-z10">
+    <mat-card-title align="center">View Attendance</mat-card-title>
+    <mat-divider></mat-divider>
+    <mat-card-content>
+      <br />
+      <div class="row">
+        <div class="col-md-4 col-sm-6 col-xs-6">
+          <label>Date</label>
+        </div>          
+        <div class="col-md-4 col-sm-6 col-xs-6">
+          <label>
+            {{loginRecordModel.login_date | date: "dd-LL-yyyy"}}
+          </label>
+        </div>
+      </div>        
+    </mat-card-content>
+</mat-card>

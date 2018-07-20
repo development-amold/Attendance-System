@@ -1,6 +1,13 @@
 var mongoose = require( 'mongoose' );
 var crypto = require('crypto');
 var jwt = require('jsonwebtoken');
+// var Schema = mongoose.Schema;
+
+var loginSchema = require('../models/login-records');  //if not defined it gives error 
+const loginRecordSchema = mongoose.model('LoginRecord').schema;
+
+// var LoginModel = mongoose.model('LoginRecord');
+
 
 var userSchema = new mongoose.Schema(
     {
@@ -17,10 +24,11 @@ var userSchema = new mongoose.Schema(
         salt: String,
         roleid: Number, // 1: SuperAdmin, 2: Admin, 3: User
         is_active: { type: Boolean, default: true},
+        login_records: [loginRecordSchema]
     },
     {
         timestamps: true  // auto adds created_At & updated_At fields
-    }    
+    }
 );
 
 userSchema.methods.setPassword = function(password){

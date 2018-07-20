@@ -23,7 +23,7 @@ export class UsersListComponent implements OnInit, AfterViewInit {
     users_data: User[];
   
     length = 0;
-    pageSize = 5;
+    pageSize = 10;
     pageSizeOptions = [5, 10, 25, 100];
 
     dataSource = new MatTableDataSource();    
@@ -41,27 +41,6 @@ export class UsersListComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
   }
-
- 
-  // ngAfterViewInit(){
-  //   try{
-  //     this.dataSource.paginator = this.myPaginator;
-  //     this.dataSource.sort = this.mySort;
-  //     this.mySort.sortChange.subscribe(() => this.myPaginator.pageIndex = 0);
-  //     this._userService.getUsers(
-  //       this.mySort.active, //sorted_column_name
-  //       this.mySort.direction,
-  //       this.myPaginator.pageIndex,
-  //       this.myPaginator.pageSize
-  //     ).subscribe((res: User[]) => {
-  //       this.length = res.length;
-  //       this.dataSource.data = res;
-  //     });
-  //   }
-  //   catch(err){
-  //     console.log(err)
-  //   }
-  // }
 
   ngAfterViewInit() {
     try {

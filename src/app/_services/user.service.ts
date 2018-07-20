@@ -5,6 +5,7 @@ import 'rxjs/add/operator/map';
 
 import {User} from "../_models/user";
 import { environment } from '../../environments/environment';
+import { LoginRecord } from '../_models/loginRecord';
 
 
 @Injectable()
@@ -43,10 +44,21 @@ export class UserService {
     return this.http.get(reqUrl).map(res => {return res;});
   }
 
-  deleteloginRecord(id){
-    const uri = this.api_uri + '/' + environment.API_ENDPOINT.deleteLoginRecord + '/' + id;
+  deleteloginRecord(userid,login_recordid){
+    const uri = this.api_uri + '/' + environment.API_ENDPOINT.deleteLoginRecord + '/' + userid + '/' + login_recordid;
     return this.http.delete(uri);
   }
   
+  addLoginRecord(loginrecord: LoginRecord):Observable<LoginRecord>{
+    const uri = this.api_uri + '/' + environment.API_ENDPOINT.addAttendance;
+    return this.http.post<LoginRecord>(uri,loginrecord)//.map(res => {console.log(res);return res;});    
+  }
+
+  viewAttendance(id){
+    const uri = this.api_uri + '/' + environment.API_ENDPOINT.viewAttendance + '/' + id;
+    return this.http.get(uri).map(res => {return res;});
+  }
+
+
 
 }

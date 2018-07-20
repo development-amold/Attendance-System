@@ -15,3 +15,5 @@ For ubuntu auto watch directory detection: sudo ng serve
 6. https://material.io/tools/icons/?style=baseline
 
 7. Added Authorization header with angular interceptor and node express-jwt
+
+8. We can get current logged in user in NODEJS using: req.user
