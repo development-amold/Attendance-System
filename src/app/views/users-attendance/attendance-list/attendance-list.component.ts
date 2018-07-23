@@ -148,7 +148,7 @@ export class AttendanceListComponent implements OnInit, AfterViewInit {
   }
 
   editLoginRecord(element){
-
+    this._router.navigate([`/attendance/${element.login_recordsid}/edit`]);
   }
 
   deleteRecord(userid,login_recordid):void{

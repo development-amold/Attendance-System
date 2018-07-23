@@ -24,7 +24,7 @@ export const appRoutes: Routes = [
       {path: 'home',component: HomeComponent},
       {path: 'attendance', component: AttendanceListComponent},
       {path: 'attendance/new', component: AttendanceAddComponent},
-      {path: 'attendance/edit/:id', component: AttendanceEditComponent},
+      {path: 'attendance/:id/edit', component: AttendanceEditComponent},
       {path: 'attendance/:id', component: AttendanceShowComponent}
     ]
   }, // end of frontend

@@ -1,6 +1,6 @@
 export class LoginRecord{
     login_date: Date;
-    in_time: Date;
-    out_time: Date;
+    in_time: '';
+    out_time: '';
     task: string;    
 }

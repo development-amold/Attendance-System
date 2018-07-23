@@ -16,6 +16,7 @@ export const environment = {
     addAttendance: "login_records_add",
     viewAttendance: "get_login_record",
     editAttendance: "edit_login_record",
+    updateAttendance: "update_login_record",
     login_records: "login_records",
     deleteLoginRecord: "deleteLoginRecord"
 

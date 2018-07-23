@@ -54,6 +54,16 @@ export class UserService {
     return this.http.post<LoginRecord>(uri,loginrecord)//.map(res => {console.log(res);return res;});    
   }
 
+  updateLoginRecord(loginrecord: LoginRecord):Observable<LoginRecord>{
+    const uri = this.api_uri + '/' + environment.API_ENDPOINT.updateAttendance;
+    return this.http.post<LoginRecord>(uri,loginrecord)//.map(res => {console.log(res);return res;});    
+  }
+
+  editLoginRecord(id){
+    const uri = this.api_uri + '/' + environment.API_ENDPOINT.editAttendance + '/' + id;
+    return this.http.get(uri).map(res => {return res;});
+  }
+
   viewAttendance(id){
     const uri = this.api_uri + '/' + environment.API_ENDPOINT.viewAttendance + '/' + id;
     return this.http.get(uri).map(res => {return res;});

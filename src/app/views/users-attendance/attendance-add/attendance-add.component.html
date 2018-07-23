@@ -21,7 +21,7 @@
         <div class="row">
           <div class="col-md-4 col-sm-12 col-xs-12">
             <mat-form-field> 
-              <input matInput type="text" atp-time-picker value={{current_date_time}} name="in_time" id="in_time" formControlName="in_time" [(ngModel)]="loginRecordModel.in_time" placeholder="In-Time" required>
+              <input matInput type="text" atp-time-picker value='' name="in_time" id="in_time" formControlName="in_time" [(ngModel)]="loginRecordModel.in_time" placeholder="In-Time" required>
               <mat-error *ngIf="in_time.errors && (in_time.dirty || in_time.touched)">{{in_timeErrorMsg()}}</mat-error>
             </mat-form-field>
           </div>  
@@ -30,7 +30,7 @@
         <div class="row">
           <div class="col-md-4 col-sm-12 col-xs-12">
             <mat-form-field> 
-              <input matInput type="text" atp-time-picker value={{current_date_time}} name="out_time" id="out_time" formControlName="out_time" [(ngModel)]="loginRecordModel.out_time" placeholder="Out-Time" required>
+              <input matInput type="text" atp-time-picker value='' name="out_time" id="out_time" formControlName="out_time" [(ngModel)]="loginRecordModel.out_time" placeholder="Out-Time" required>
               <mat-error *ngIf="out_time.errors && (out_time.dirty || out_time.touched)">{{out_timeErrorMsg()}}</mat-error>
             </mat-form-field>
           </div>  

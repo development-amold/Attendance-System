@@ -1,17 +1,26 @@
-<mat-card class="mat-elevation-z10">
+<mat-card class="mat-elevation-z10" style="word-break: break-word;">
     <mat-card-title align="center">View Attendance</mat-card-title>
     <mat-divider></mat-divider>
-    <mat-card-content>
-      <br />
-      <div class="row">
-        <div class="col-md-4 col-sm-6 col-xs-6">
-          <label>Date</label>
-        </div>          
-        <div class="col-md-4 col-sm-6 col-xs-6">
-          <label>
-            {{loginRecordModel.login_date | date: "dd-LL-yyyy"}}
-          </label>
-        </div>
-      </div>        
-    </mat-card-content>
+    <mat-grid-list cols="2" rowHeight="50px">
+      <mat-grid-tile>Date</mat-grid-tile>      
+      <mat-grid-tile>{{loginRecordModel.login_date | date: "dd-LL-yyyy"}}</mat-grid-tile>
+    </mat-grid-list>        
+    <mat-divider></mat-divider>
+    <mat-grid-list cols="2" rowHeight="50px">
+      <mat-grid-tile>In-Time</mat-grid-tile>      
+      <mat-grid-tile>{{loginRecordModel.in_time | date: "HH:mm a"}}</mat-grid-tile>      
+    </mat-grid-list>
+    <mat-divider></mat-divider>
+    <mat-grid-list cols="2" rowHeight="50px">
+      <mat-grid-tile>Out-Time</mat-grid-tile>      
+      <mat-grid-tile>{{loginRecordModel.out_time | date: "HH:mm a"}}</mat-grid-tile>            
+    </mat-grid-list>
+    <mat-divider></mat-divider>
+    <mat-grid-list cols="2" rowHeight="200px">
+        <mat-grid-tile>Task</mat-grid-tile>      
+        <mat-grid-tile>{{loginRecordModel.task}}</mat-grid-tile>                        
+    </mat-grid-list>
+    <mat-divider></mat-divider>
 </mat-card>
+
+

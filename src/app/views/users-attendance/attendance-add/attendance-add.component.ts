@@ -14,10 +14,11 @@ import { LoginRecord } from '../../../_models/loginRecord';
   styleUrls: ['./attendance-add.component.css']
 })
 export class AttendanceAddComponent implements OnInit {
+  current_date_time = `${new Date().getHours()}:${new Date().getMinutes()}`;
   loginRecordModel: LoginRecord = {
     login_date: new Date(),
-    in_time: new Date(),
-    out_time: new Date(),
+    in_time: '',
+    out_time: '',
     task: ''      
   };
 
@@ -27,7 +28,7 @@ export class AttendanceAddComponent implements OnInit {
   out_time: FormControl;
   task: FormControl;
 
-  current_date_time = `${new Date().getHours()}:${new Date().getMinutes()}`;
+  
   // login_date_filter = (d: Date): boolean => {
   //   const day = d.getDay();
   //   return day !== 0 && day !== 6;  // Prevent Saturday and Sunday from being selected.

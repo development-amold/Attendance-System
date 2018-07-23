@@ -120,41 +120,127 @@ module.exports.login_recordsAdd = function(req, res){
         if(errObj){
             console.log(errObj.message);
         }else{
-            if(user){
-                var loginrecord = new LoginRecord();
-                loginrecord.user_id = req.user.id
-
-                validDateTime = getValidDateTime(req.body.login_date,req.body.in_time,req.body.out_time);
-
-                loginrecord.login_date = validDateTime.getDate
-                
-                loginrecord.in_time = validDateTime.getInTime
-                loginrecord.out_time = validDateTime.getOutTime
-                loginrecord.task = req.body.task;
-                if(loginrecord !== null && loginrecord !== ""){
-                    user.login_records.push(loginrecord);
-                    user.save(function(err,result){
-                        if(err){
-                            sendJSONresponse(res, 422, {
-                                "msgCode": "error",
-                                'message': 'User not saved'
-                            });                              
-                        }else{
-                            sendJSONresponse(res, 200, {
-                                "msgCode": "success",
-                                'message': 'Record added successfully'
-                            });                              
-                        }
-                    });   
+            try {
+                if(user){
+                    var loginrecord = new LoginRecord();
+                    loginrecord.user_id = req.user.id
+    
+                    validDateTime = getValidDateTime(req.body.login_date,req.body.in_time,req.body.out_time);
+    
+                    loginrecord.login_date = validDateTime.getDate
+                    
+                    loginrecord.in_time = validDateTime.getInTime
+                    loginrecord.out_time = validDateTime.getOutTime
+                    loginrecord.task = req.body.task;
+                    if(loginrecord !== null && loginrecord !== ""){
+                        console.log(user.login_records);
+                        user.login_records.push(loginrecord);
+                        user.save(function(err,result){
+                            if(err){
+                                sendJSONresponse(res, 422, {
+                                    "msgCode": "error",
+                                    'message': 'User not saved'
+                                });                              
+                            }else{
+                                console.log("----RESULT---")
+                                console.log(result);
+                                sendJSONresponse(res, 200, {
+                                    "msgCode": "success",
+                                    'message': 'Record added successfully'
+                                });                              
+                            }
+                        });   
+                    }
+                    
+                }else{
+                    console.log("Not found");
                 }
-                
-            }else{
-                console.log("Not found");
+            }catch(exp){
+                console.log(exp.message)
             }
-
         }        
     })
 }
+
+module.exports.edit_login_record = function(req,res){
+    console.log("EDITING")
+    User.findById({_id: req.user.id}, function(err, user){
+        if(err){
+            sendJSONresponse(res, 422, {
+                "msgCode": "error",
+                "message": err.message
+            });
+        }else{
+            var loginrecord = user.login_records.id(req.params.login_record_id);
+            
+            modified_loginrecord = {}
+            modified_loginrecord["_id"] = loginrecord._id;
+            modified_loginrecord["user_id"] = loginrecord.user_id;
+            modified_loginrecord["login_date"] = loginrecord.login_date;
+            modified_loginrecord["in_time"] = `${loginrecord.in_time.getHours()}:${loginrecord.in_time.getMinutes()}`;
+            modified_loginrecord["out_time"] = `${loginrecord.out_time.getHours()}:${loginrecord.out_time.getMinutes()}`;
+            modified_loginrecord["task"] = loginrecord.task;
+            console.log(modified_loginrecord)
+            if(Object.keys(loginrecord).length > 0){
+                sendJSONresponse(res, 200, modified_loginrecord); 
+            }else{
+                sendJSONresponse(res, 200, {
+                    "msgCode": "success",
+                    "message": []
+                }); 
+            }    
+        }   
+    });     
+}
+
+
+module.exports.update_login_record = function(req, res){
+    console.log("------Calling LoginRecord UPDATING ----");
+    console.log(req.body)
+    User.findOne({email: req.user.email}).exec(function(errObj, user) {
+        if(errObj){
+            console.log(errObj.message);
+        }else{
+            try {
+                if(user){
+                    var loginrecord = new LoginRecord();
+                    loginrecord.user_id = req.user.id
+                    validDateTime = getValidDateTime(req.body.login_date,req.body.in_time,req.body.out_time);
+                    loginrecord.login_date = validDateTime.getDate
+                    loginrecord.in_time = validDateTime.getInTime
+                    loginrecord.out_time = validDateTime.getOutTime
+                    loginrecord.task = req.body.task;
+                    if(loginrecord !== null && loginrecord !== ""){
+                        console.log(user.login_records);
+                        new_login_rec = user.login_records.id(req.params.login_record_id);
+                        user.login_records.set(new_login_rec);
+                        user.save(function(err,result){
+                            if(err){
+                                sendJSONresponse(res, 422, {
+                                    "msgCode": "error",
+                                    'message': 'User not saved'
+                                });                              
+                            }else{
+                                console.log("----RESULT---")
+                                console.log(result);
+                                sendJSONresponse(res, 200, {
+                                    "msgCode": "success",
+                                    'message': 'Record added successfully'
+                                });                              
+                            }
+                        });   
+                    }
+                    
+                }else{
+                    console.log("Not found");
+                }
+            }catch(exp){
+                console.log(exp.message)
+            }
+        }        
+    })
+}
+
 
 module.exports.login_recordsView = function(req,res){
     User.findById({_id: req.user.id}, function(err, user){
