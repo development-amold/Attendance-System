@@ -54,8 +54,8 @@ export class UserService {
     return this.http.post<LoginRecord>(uri,loginrecord)//.map(res => {console.log(res);return res;});    
   }
 
-  updateLoginRecord(loginrecord: LoginRecord):Observable<LoginRecord>{
-    const uri = this.api_uri + '/' + environment.API_ENDPOINT.updateAttendance;
+  updateLoginRecord(loginrecord: LoginRecord, login_recordid):Observable<LoginRecord>{
+    const uri = this.api_uri + '/' + environment.API_ENDPOINT.updateAttendance + '/' + login_recordid;
     return this.http.post<LoginRecord>(uri,loginrecord)//.map(res => {console.log(res);return res;});    
   }
 

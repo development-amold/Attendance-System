@@ -22,7 +22,7 @@ export class AttendanceEditComponent implements OnInit {
     task: ''      
   };
 
-  editLoginRecord: any;
+  current_LoginRecordId: number;
 
   angForm: FormGroup;
   login_date: FormControl;
@@ -44,6 +44,7 @@ export class AttendanceEditComponent implements OnInit {
     this.createForm();    
     this._route.params.subscribe(params => {
       this._userService.editLoginRecord(params['id']).subscribe(res => {
+        this.current_LoginRecordId = res["_id"];
         this.loginRecordModel.login_date = res["login_date"];
         this.loginRecordModel.in_time = res["in_time"];
         this.loginRecordModel.out_time = res["out_time"];
@@ -96,7 +97,7 @@ export class AttendanceEditComponent implements OnInit {
   }
 
   updateLoginRecord(){
-    this._userService.updateLoginRecord(this.loginRecordModel).subscribe(res => {
+    this._userService.updateLoginRecord(this.loginRecordModel,this.current_LoginRecordId).subscribe(res => {
       if(res["msgCode"] == "error"){
         this.toastr.error(res["message"],res["msgCode"]);
       }else{
