@@ -5,7 +5,7 @@ var User = mongoose.model('User');
 
 User.count({},function(err,userCount){   //collection.count is deprecated, and will be removed in a future version. Use collection.countDocuments
     console.log("Number of users: "+ userCount)
-    if (userCount < 3){
+    if (userCount < 2){
         var admins = [
             {
                 email: "superadmin@domain.com",
@@ -18,13 +18,7 @@ User.count({},function(err,userCount){   //collection.count is deprecated, and w
                 name: "Admin",
                 roleid: 2,
                 password: "Admin=1234"
-            },
-            {
-                email: "user@domain.com",
-                name: "user",
-                roleid: 3,
-                password: "User=1234"
-            }            
+            }      
         ];        
         admins.forEach(key => {
             console.log(key.email);
