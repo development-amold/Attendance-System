@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  BASE_URL: 'https://payroll-a.herokuapp.com/',
+  BASE_URL: 'https://payroll-a.herokuapp.com',
   API_ENDPOINT: {
     login: "login",
     logout: "logout",
