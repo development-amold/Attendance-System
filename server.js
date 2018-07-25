@@ -16,8 +16,9 @@ const express = require('express'),
     var routesApi = require('./node-api/expressRoutes/index');
 
     var dbConfig = config.get('dbConfig');
-    const db_conn_string = `mongodb://${dbConfig.username}:${dbConfig.password}@${dbConfig.host}:${dbConfig.port}/${dbConfig.dbName}`;
-    // const db_conn_string = 'mongodb://localhost:27017/attendance'
+    const db_conn_string = 'mongodb://localhost:27017/attendance';
+    // const db_conn_string = `mongodb://${dbConfig.username}:${dbConfig.password}@${dbConfig.host}:${dbConfig.port}/${dbConfig.dbName}`;
+    
 
     mongoose.Promise = global.Promise;
     mongoose.connect(db_conn_string,{ useNewUrlParser: true }).then(

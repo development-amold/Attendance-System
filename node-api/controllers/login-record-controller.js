@@ -122,7 +122,7 @@ module.exports.login_recordsAdd = function(req, res){
 }
 
 module.exports.login_recordsView = function(req,res){
-    User.findById({_id: req.user.id}, function(err, user){
+    User.findOne({"login_records._id": req.params.login_record_id }, function(err, user){
         if(err){
             sendJSONresponse(res, 422, {
                 "msgCode": "error",
@@ -143,8 +143,7 @@ module.exports.login_recordsView = function(req,res){
 }
 
 module.exports.edit_login_record = function(req,res){
-    console.log("EDITING")
-    User.findById({_id: req.user.id}, function(err, user){
+    User.findOne({"login_records._id": req.params.login_record_id }, function(err, user){
         if(err){
             sendJSONresponse(res, 422, {
                 "msgCode": "error",

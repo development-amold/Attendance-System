@@ -37,7 +37,8 @@ export const appRoutes: Routes = [
       {path: 'employees/edit/:id', component: UsersEditComponent},
       {path: 'attendance', component: AttendanceListComponent},
       {path: 'attendance/new', component: AttendanceAddComponent},
-      {path: 'attendance/edit/:id', component: AttendanceEditComponent}      
+      {path: 'attendance/:id/edit', component: AttendanceEditComponent},
+      {path: 'attendance/:id', component: AttendanceShowComponent}
       // { path: '**', redirectTo: "",pathMatch: "full"}, //--redirect to root path if invalid path found , This wildCard route always be at last
     ]
   }, //end of backend

@@ -12,7 +12,7 @@ import { catchError, map, tap, startWith, switchMap } from 'rxjs/operators';
 import { LoginRecord } from '../../../_models/loginRecord';
 import {GlobarvarService} from '../../../_services/globarvar.service';
 import { AuthenticationService } from '../../../_services/authentication.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-attendance-list',
@@ -38,7 +38,8 @@ export class AttendanceListComponent implements OnInit, AfterViewInit {
     private toastr: ToastrService,
     private _globalService: GlobarvarService,
     private authService: AuthenticationService,
-    private _router: Router
+    private _router: Router,
+    private _activeRoute: ActivatedRoute
   ) 
   { 
     this.current_user = this.authService.getUserDetails();
@@ -144,11 +145,19 @@ export class AttendanceListComponent implements OnInit, AfterViewInit {
   }
 
   showLoginRecord(element){
-    this._router.navigate([`/attendance/${element.login_recordsid}`]);
+    if(this.current_user.roleid == 3){
+      this._router.navigate([`/attendance/${element.login_recordsid}`]);
+    }else{
+      this._router.navigate([`/dashboard/attendance/${element.login_recordsid}`]);
+    }
   }
 
   editLoginRecord(element){
-    this._router.navigate([`/attendance/${element.login_recordsid}/edit`]);
+    if(this.current_user.roleid == 3){
+      this._router.navigate([`/attendance/${element.login_recordsid}/edit`]);
+    }else{
+      this._router.navigate([`/dashboard/attendance/${element.login_recordsid}/edit`]);
+    }
   }
 
   deleteRecord(userid,login_recordid):void{
