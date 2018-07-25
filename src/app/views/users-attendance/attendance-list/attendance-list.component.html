@@ -15,12 +15,12 @@
     </ng-container>      
     <ng-container matColumnDef="inTime">
       <mat-header-cell *matHeaderCellDef mat-sort-header>In-Time</mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.in_time | date: "HH:mm"}} </mat-cell>
+      <mat-cell *matCellDef="let element"> {{element.in_time}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="outTime">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Out-Time</mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.out_time | date: "HH:mm"}} </mat-cell>
+      <mat-cell *matCellDef="let element"> {{element.out_time}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="actions" class="action-list">

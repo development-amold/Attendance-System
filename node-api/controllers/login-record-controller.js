@@ -38,39 +38,58 @@ module.exports.login_records = function(req, res){
     var skip_rec = parseInt(req.query.pageIndex)*pageLimit;
     var sort_data = {};
     sort_data[`${req.query.sortCol}`] = req.query.sortOrder == "asc" ? 1 : -1 ;  
-    console.log(req.user)
     
     if(req.user.roleid == 1 || req.user.roleid == 2){ //admin
         var match_query = { roleid: 3, "login_records": {$not: {$in: [null,""]} } }
     }else{ //normal user
         var match_query = { email: req.user.email, "login_records": {$not: {$in: [null,""]} } }
     }
+
     User.aggregate([
         {$match: 
             match_query
         },
         {$unwind: '$login_records'},
-        {   $project: 
-            {   user_id: 1, 
-                email: 1, 
-                login_recordsid: "$login_records._id",
-                login_date: "$login_records.login_date", 
-                in_time: "$login_records.in_time", 
-                out_time: "$login_records.out_time",
-                task: "$login_records.task",
+        {
+            $group: {
+                _id: null,
+                total_count: {$sum: 1}  //count of all the records
             }
-        },
-        {$sort: sort_data}, // 1 => asc & -1 => desc
-        { $skip : skip_rec },
-        {$limit: pageLimit}
-      ]).exec(function(err, users) {
-        if (err) { return console.log(err) }
-        sendJSONresponse(res, 200, {
-            "msgCode": "success",
-            loginRecords_data: users,    
-            total_rec_count: users.length
-        });  
-    });
+        },        
+    ]).then(function(loginRecordsGroupObj){
+        User.aggregate([
+            {$match: 
+                match_query
+            },
+            {$unwind: '$login_records'},
+            {   $project: 
+                {   user_id: 1, 
+                    email: 1, 
+                    login_recordsid: "$login_records._id",
+                    login_date: "$login_records.login_date", 
+                    in_time: "$login_records.in_time", 
+                    out_time: "$login_records.out_time",
+                    task: "$login_records.task",
+                }
+            },
+            {$sort: sort_data}, // 1 => asc & -1 => desc
+            { $skip : skip_rec },
+            {$limit: pageLimit}
+        ]).exec(function(err, users) {
+            if (err) { return console.log(err) }
+            users.forEach(element => {
+                element.in_time = formatTimeIn2Digits(element.in_time.getHours(),element.in_time.getMinutes());
+                element.out_time = formatTimeIn2Digits(element.out_time.getHours(),element.out_time.getMinutes());
+            });
+            sendJSONresponse(res, 200, {
+                "msgCode": "success",
+                loginRecords_data: users,    
+                total_rec_count: loginRecordsGroupObj[0].total_count  //get total records count with help of promise
+            });  
+        });
+    }
+    ).catch(err => {console.log(err.message)});
+
 
 }; 
 
