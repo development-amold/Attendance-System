@@ -141,6 +141,24 @@ module.exports.login_recordsAdd = function(req, res){
 }
 
 module.exports.login_recordsView = function(req,res){
+    // User.findOne({"login_records._id": req.params.login_record_id }, function(err, user){
+    //     if(err){
+    //         sendJSONresponse(res, 422, {
+    //             "msgCode": "error",
+    //             "message": err.message
+    //         });
+    //     }else{
+    //         var loginrecord = user.login_records.id(req.params.login_record_id);
+    //         if(Object.keys(loginrecord).length > 0){
+    //             sendJSONresponse(res, 200, loginrecord); 
+    //         }else{
+    //             sendJSONresponse(res, 200, {
+    //                 "msgCode": "success",
+    //                 "message": []
+    //             }); 
+    //         }    
+    //     }   
+    // });  
     User.findOne({"login_records._id": req.params.login_record_id }, function(err, user){
         if(err){
             sendJSONresponse(res, 422, {
@@ -149,8 +167,18 @@ module.exports.login_recordsView = function(req,res){
             });
         }else{
             var loginrecord = user.login_records.id(req.params.login_record_id);
+            
+            modified_loginrecord = {}
+            modified_loginrecord["_id"] = loginrecord._id;
+            modified_loginrecord["user_id"] = loginrecord.user_id;
+            modified_loginrecord["login_date"] = loginrecord.login_date;
+            modified_loginrecord["in_time"] = formatTimeIn2Digits(loginrecord.in_time.getHours(),loginrecord.in_time.getMinutes());
+            //`${loginrecord.in_time.getHours() <= 9 ? 0 + }:${loginrecord.in_time.getMinutes()}`;
+            modified_loginrecord["out_time"] = formatTimeIn2Digits(loginrecord.out_time.getHours(),loginrecord.out_time.getMinutes());
+            //`${loginrecord.out_time.getHours()}:${loginrecord.out_time.getMinutes()}`;
+            modified_loginrecord["task"] = loginrecord.task;
             if(Object.keys(loginrecord).length > 0){
-                sendJSONresponse(res, 200, loginrecord); 
+                sendJSONresponse(res, 200, modified_loginrecord); 
             }else{
                 sendJSONresponse(res, 200, {
                     "msgCode": "success",
@@ -158,7 +186,7 @@ module.exports.login_recordsView = function(req,res){
                 }); 
             }    
         }   
-    });     
+    });        
 }
 
 module.exports.edit_login_record = function(req,res){
