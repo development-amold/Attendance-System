@@ -1,6 +1,5 @@
 {
     "dbConfig": {
-    "env": "prod",
     "host": "ds145981.mlab.com",
     "port": 45981,
     "dbName": "heroku_67fld4pk",
