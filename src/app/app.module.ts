@@ -20,7 +20,6 @@ import { UserFooterComponent } from './user-layout/user-footer/user-footer.compo
 import { UserHeaderComponent } from './user-layout/user-header/user-header.component';
 import { LoginComponent } from './login/login.component';
 import { AuthenticationService } from './_services/authentication.service';
-import { HomeService } from './_services/home.service';
 import { ButtonService } from './_services/button.service';
 import { AuthorizeGuard } from './authguard/authorize.guard';
 import {CommonHttpInterceptor} from './interceptor/common-http-interceptor';
@@ -200,7 +199,6 @@ import { AttendanceShowComponent } from './views/users-attendance/attendance-sho
     AuthenticationService, 
     AuthorizeGuard, 
     ButtonService, 
-    HomeService, 
     GlobarvarService,
     UserService,
     NavigationService,

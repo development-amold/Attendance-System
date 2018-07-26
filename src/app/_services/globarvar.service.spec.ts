@@ -9,7 +9,7 @@ describe('GlobarvarService', () => {
     });
   });
 
-  it('should be created', inject([GlobarvarService], (service: GlobarvarService) => {
-    expect(service).toBeTruthy();
-  }));
+  // it('should be created', inject([GlobarvarService], (service: GlobarvarService) => {
+  //   expect(service).toBeTruthy();
+  // }));
 });
