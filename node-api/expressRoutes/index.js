@@ -36,7 +36,7 @@ router.get('/edit_login_record/:login_record_id', auth, ctrlLoginRecord.edit_log
 router.post('/update_login_record/:login_record_id', auth, ctrlLoginRecord.update_login_record)
 router.get('/get_login_record/:login_record_id', auth, ctrlLoginRecord.login_recordsView)
 router.delete('/deleteLoginRecord/:user_id/:login_record_id',auth, ctrlLoginRecord.deleteLoginRecord);
-
+router.get('/login_records_report_by_month', auth, ctrlLoginRecord.login_records_report_by_month);
 
 // profile
 // router.get('/profile', auth, ctrlProfile.profileRead);

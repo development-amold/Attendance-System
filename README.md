@@ -17,3 +17,5 @@ For ubuntu auto watch directory detection: sudo ng serve
 7. Added Authorization header with angular interceptor and node express-jwt
 
 8. We can get current logged in user in NODEJS using: req.user
+
+9. npm install --save tempfile && excejs [Used for XLSX exporting]
